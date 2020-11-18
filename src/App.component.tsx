@@ -1,13 +1,14 @@
 import {Button} from '@material-ui/core';
-import React, {useState} from 'react';
+import React from 'react';
 import {NavigationComponent} from './navigation/Navigation.component';
+import {useCounter} from "./common/hook/Counter.hook";
 
 export function AppComponent() {
-  const [counter, setCounter] = useState(0)
+  const {counter, setCounter} = useCounter(0)
 
   return (
     <div>
-      <NavigationComponent />
+      <NavigationComponent/>
       <div>
         <p>Count: {counter}</p>
         <Button variant="contained" color="primary" onClick={() => setCounter(counter + 1)}>

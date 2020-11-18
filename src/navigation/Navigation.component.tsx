@@ -32,23 +32,8 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flexGrow: 1,
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
     title: {
       flexGrow: 1,
-    },
-    modal: {
-      position: "absolute",
-      top: "20%",
-      width: "100%",
-      display: "flex",
-      justifyContent: "center",
-      alignContent: "center",
-      outline: 0
-    },
-    modalContainer: {
-      maxWidth: "40%"
     }
   }),
 );

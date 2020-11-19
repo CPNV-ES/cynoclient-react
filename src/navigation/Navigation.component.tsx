@@ -9,33 +9,33 @@ import GroupIcon from '@material-ui/icons/Group';
 import {useHistory} from 'react-router-dom';
 
 export function NavigationComponent() {
-  const classes = useStyles();
-  const history = useHistory();
+    const classes = useStyles();
+    const history = useHistory();
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Cynoclient
-          </Typography>
+    return (
+        <div className={classes.root}>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="h6" className={classes.title}>
+                        Cynoclient
+                    </Typography>
 
-          <Button color={"inherit"} startIcon={<GroupIcon/>} onClick={() => history.push("/")}>
-            Home
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  )
+                    <Button color={"inherit"} startIcon={<GroupIcon/>} onClick={() => history.push("/")}>
+                        Home
+                    </Button>
+                </Toolbar>
+            </AppBar>
+        </div>
+    )
 }
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    title: {
-      flexGrow: 1,
-    }
-  }),
+    createStyles({
+        root: {
+            flexGrow: 1,
+        },
+        title: {
+            flexGrow: 1,
+        }
+    }),
 );

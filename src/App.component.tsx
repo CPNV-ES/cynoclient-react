@@ -4,14 +4,14 @@ import {ProviderComponent} from "./Provider.component";
 import {RouterComponent} from "./Router.component";
 
 export function AppComponent() {
-  return (
-    <ProviderComponent>
-      <div>
-        <NavigationComponent/>
-        <div>
-          <RouterComponent/>
-        </div>
-      </div>
-    </ProviderComponent>
-  );
+    return (
+        <ProviderComponent>
+            <div>
+                <NavigationComponent/>
+                <div>
+                    <RouterComponent/>
+                </div>
+            </div>
+        </ProviderComponent>
+    );
 }

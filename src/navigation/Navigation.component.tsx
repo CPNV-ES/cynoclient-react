@@ -6,9 +6,11 @@ import Button from '@material-ui/core/Button';
 import {createStyles, Theme} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import GroupIcon from '@material-ui/icons/Group';
+import { useHistory } from 'react-router-dom';
 
 export function NavigationComponent() {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <div className={classes.root}>
@@ -18,8 +20,8 @@ export function NavigationComponent() {
             Cynoclient
           </Typography>
 
-          <Button color={"inherit"} startIcon={<GroupIcon/>}>
-            Exemple
+          <Button color={"inherit"} startIcon={<GroupIcon/>} onClick={() => history.push("/")}>
+            Home
           </Button>
         </Toolbar>
       </AppBar>

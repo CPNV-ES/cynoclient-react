@@ -1,7 +1,8 @@
-import React, {PropsWithChildren} from "react";
+import React, {PropsWithChildren, Suspense} from "react";
 import {ReactQueryDevtools} from "react-query-devtools";
 import {BrowserRouter} from "react-router-dom"
 import {QueryCache, ReactQueryCacheProvider} from "react-query";
+import {LoaderComponent} from "./common/component/Loader.component";
 
 const queryCache = new QueryCache({
     defaultConfig: {
@@ -15,7 +16,9 @@ export function ProviderComponent(props: PropsWithChildren<any>) {
     return (
         <BrowserRouter>
             <ReactQueryCacheProvider queryCache={queryCache}>
-                {props.children}
+                <Suspense fallback={<LoaderComponent/>}>
+                    {props.children}
+                </Suspense>
                 <ReactQueryDevtools initialIsOpen/>
             </ReactQueryCacheProvider>
         </BrowserRouter>

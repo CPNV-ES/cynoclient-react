@@ -1,16 +1,14 @@
-import {Button} from "@material-ui/core";
 import React from "react";
-import {useCounter} from "../common/hook/Counter.hook";
+import {useClients} from "../common/hook/Clients.hook";
 
 export function HomeComponent() {
-    const {counter, setCounter} = useCounter(0)
+    const {data: clients} = useClients()
 
     return (
         <div>
-            <p>Count: {counter}</p>
-            <Button variant="contained" color="primary" onClick={() => setCounter(counter + 1)}>
-                Increment
-            </Button>
+            {
+                clients?.map(client => (<p key={client.id}>{client.firstname}</p>))
+            }
         </div>
     )
 }

@@ -4,11 +4,23 @@ import {Table, TableCell} from "@material-ui/core";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import React from "react";
+import {useClients} from "../common/hook/Clients.hook";
+import TableBody from "@material-ui/core/TableBody";
 import {Client} from "../common/resource/Client.resource";
 
-export function ClientsTable() {
-	clients: Client[]
+export function ClientRow(client: Client) {
+	return (
+		<TableRow>
+			<TableCell>{client.firstname}</TableCell>
+			<TableCell>{client.lastname}</TableCell>
+			<TableCell>{client.isFemale}</TableCell>
+			<TableCell>{client.phone}</TableCell>
+		</TableRow>
+	);
+}
 
+export function ClientsTable() {
+	const {data: clients} = useClients();
 	return (
 		<TableContainer component={Paper}>
 			<Table>
@@ -20,6 +32,9 @@ export function ClientsTable() {
 						<TableCell>Phone</TableCell>
 					</TableRow>
 				</TableHead>
+				<TableBody>
+					{clients?.map((client) => ClientRow(client))}
+				</TableBody>
 			</Table>
 		</TableContainer>
 	);

@@ -23,6 +23,9 @@ export function NavigationComponent() {
                     <Button color={"inherit"} startIcon={<GroupIcon/>} onClick={() => history.push("/")}>
                         Home
                     </Button>
+                    <Button color={"inherit"} startIcon={<GroupIcon/>} onClick={() => history.push("/client")}>
+                        Client
+                    </Button>
                 </Toolbar>
             </AppBar>
         </div>

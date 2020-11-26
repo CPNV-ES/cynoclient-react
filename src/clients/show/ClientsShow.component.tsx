@@ -3,6 +3,7 @@ import {Redirect, useParams} from "react-router-dom";
 import {useClient} from "../../common/hook/Clients.hook";
 import {Button, createStyles, Grid, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import {displayClientSex} from "../../common/utils/Client.utils";
 
 export function ClientsShowComponent() {
     const styles = useStyles();
@@ -32,7 +33,7 @@ export function ClientsShowComponent() {
                 </Grid>
 
                 <Grid item xs={12} md={4}>
-                    <p>{client.isFemale}</p>
+                    <p>{displayClientSex(client)}</p>
                 </Grid>
 
                 <Grid item xs={12} md={4}>

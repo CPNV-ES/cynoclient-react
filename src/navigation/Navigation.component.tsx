@@ -20,9 +20,6 @@ export function NavigationComponent() {
                         Cynoclient
                     </Typography>
 
-                    <Button color={"inherit"} startIcon={<GroupIcon/>} onClick={() => history.push("/")}>
-                        Home
-                    </Button>
                     <Button color={"inherit"} startIcon={<GroupIcon/>} onClick={() => history.push("/clients")}>
                         Clients
                     </Button>

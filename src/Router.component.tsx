@@ -1,7 +1,6 @@
 import React from "react";
-import {Route, Switch} from "react-router-dom";
-import {HomeComponent} from "./home/Home.component";
-import {ClientsIndexComponent} from "./clients/ClientsIndex.component";
+import {Redirect, Route, Switch} from "react-router-dom";
+import {ClientsIndexComponent} from "./clients/index/ClientsIndex.component";
 
 export function RouterComponent() {
     return (
@@ -10,7 +9,7 @@ export function RouterComponent() {
                 <ClientsIndexComponent/>
             </Route>
             <Route path="/">
-                <HomeComponent/>
+                <Redirect to="/clients"/>
             </Route>
         </Switch>
     )

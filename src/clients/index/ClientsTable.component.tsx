@@ -4,10 +4,10 @@ import {Table, TableCell} from "@material-ui/core";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import React from "react";
-import {useClients} from "../common/hook/Clients.hook";
+import {useClients} from "../../common/hook/Clients.hook";
 import TableBody from "@material-ui/core/TableBody";
-import {Client} from "../common/resource/Client.resource";
-import {displayClientSex} from "../common/utils/Client.utils";
+import {Client} from "../../common/resource/Client.resource";
+import {displayClientSex} from "../../common/utils/Client.utils";
 
 export function ClientRow(client: Client) {
 	return (

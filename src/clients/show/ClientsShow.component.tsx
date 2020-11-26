@@ -1,5 +1,5 @@
 import React from "react";
-import {Redirect, useParams} from "react-router-dom";
+import {Redirect, useHistory, useParams} from "react-router-dom";
 import {useClient} from "../../common/hook/Clients.hook";
 import {Button, createStyles, Grid, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
@@ -8,6 +8,7 @@ import {displayClientSex} from "../../common/utils/Client.utils";
 export function ClientsShowComponent() {
     const styles = useStyles();
     const route = useParams<{ clientId: string }>();
+    const history = useHistory();
 
     const {data: client} = useClient(Number(route.clientId));
 
@@ -24,28 +25,30 @@ export function ClientsShowComponent() {
 
                 <Grid container item direction={"row"} justify={"space-between"} xs={12} md={3}>
                     <Grid item xs={6}>
-                        <Button variant={"contained"} color={"primary"}>Modifier</Button>
+                        <Button variant={"contained"} color={"primary"}
+                                onClick={() => history.push(`/clients/${client?.id}/edit`)}>Modifier</Button>
                     </Grid>
 
                     <Grid item xs={6}>
-                        <Button variant={"contained"} color={"secondary"}>Supprimer</Button>
+                        <Button variant={"contained"} color={"secondary"}
+                                onClick={() => alert("NOT IMPLEMENTED")}>Supprimer</Button>
                     </Grid>
                 </Grid>
 
                 <Grid item xs={12} md={4}>
-                    <p>{displayClientSex(client)}</p>
+                    <p>Sex: {displayClientSex(client)}</p>
                 </Grid>
 
                 <Grid item xs={12} md={4}>
-                    <p>{client.email}</p>
+                    <p>Email: {client.email}</p>
                 </Grid>
 
                 <Grid item xs={12} md={4}>
-                    <p>{client.phone}</p>
+                    <p>Téléphone: {client.phone}</p>
                 </Grid>
 
                 <Grid item xs={12}>
-                    <p>{client.street}</p>
+                    <p>Rue: {client.street}</p>
                 </Grid>
             </Grid>
         </div>

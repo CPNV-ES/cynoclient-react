@@ -1,16 +1,19 @@
 import React from "react";
-import {Route, Switch} from "react-router-dom";
-import {HomeComponent} from "./home/Home.component";
-import {ClientsDetailComponent} from "./clients/detail/ClientsDetail.component";
+import {Redirect, Route, Switch} from "react-router-dom";
+import {ClientsIndexComponent} from "./clients/index/ClientsIndex.component";
+import {ClientsShowComponent} from "./clients/show/ClientsShow.component";
 
 export function RouterComponent() {
     return (
         <Switch>
-            <Route path="/clients/:clientId/detail">
-                <ClientsDetailComponent/>
+            <Route path="/clients/:clientId/show">
+                <ClientsShowComponent/>
+            </Route>
+            <Route path="/clients">
+                <ClientsIndexComponent/>
             </Route>
             <Route path="/">
-                <HomeComponent/>
+                <Redirect to="/clients"/>
             </Route>
         </Switch>
     )

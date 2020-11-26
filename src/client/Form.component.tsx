@@ -1,11 +1,13 @@
 import React from 'react';
-import {Button, Grid, InputLabel, MenuItem} from "@material-ui/core";
-import {TextField, Select} from 'formik-material-ui';
+import {Button, createStyles, Grid, InputLabel, MenuItem, Theme} from "@material-ui/core";
+import {Select, TextField} from 'formik-material-ui';
 import {Field, Formik} from 'formik';
 import * as Yup from 'yup';
 import "yup-phone";
+import {makeStyles} from "@material-ui/core/styles";
 
 export function FormComponent() {
+    const styles = useStyles();
 
     return (
         <Formik
@@ -51,49 +53,37 @@ export function FormComponent() {
             }}
         >
             {({submitForm, isSubmitting}) => (
-                <div style={{width: "100%", overflow: "hidden"}}>
-                    <h1 style={{
-                        textAlign: 'center',
-                        paddingBottom: "5%",
-                    }}
-                    >
+                <div className={styles.wrapper}>
+                    <h1 className={styles.fieldRow}>
                         Create Client
                     </h1>
                     <form>
-                        <Grid
-                            container
-                            spacing={5}
-                            direction="row"
-                            alignItems="center"
-                            justify="center"
-                        >
-                            <Grid item xs={12} >
+                        <Grid container justify="center">
+                            <Grid item xs={12} className={styles.fieldRow}>
                                 <InputLabel>genre</InputLabel>
                                 <Field
                                     component={Select}
                                     name="female"
-                                    label="female"
-                                >
+                                    label="female">
                                     <MenuItem value="0">Homme</MenuItem>
                                     <MenuItem value="1">Femme</MenuItem>
                                 </Field>
                             </Grid>
-                            <Grid item xs={12} md={6}>
+                            <Grid item xs={12} md={6} className={styles.fieldRow}>
                                 <Field
                                     component={TextField}
                                     name="firstname"
                                     label="firstname"
                                 />
                             </Grid>
-                            <Grid item xs={12} md={6} >
+                            <Grid item xs={12} md={6} className={styles.fieldRow}>
                                 <Field
                                     component={TextField}
                                     name="lastname"
                                     label="lastname"
                                 />
                             </Grid>
-                            <Grid item xs={12} md={6} >
-
+                            <Grid item xs={12} md={6} className={styles.fieldRow}>
                                 <Field
                                     component={TextField}
                                     type="phone"
@@ -101,7 +91,7 @@ export function FormComponent() {
                                     label="phone"
                                 />
                             </Grid>
-                            <Grid item xs={12} md={6}>
+                            <Grid item xs={12} md={6} className={styles.fieldRow}>
                                 <Field
                                     component={TextField}
                                     type="email"
@@ -110,31 +100,26 @@ export function FormComponent() {
                                 />
 
                             </Grid>
-                            <Grid item xs={12} md={6}>
+                            <Grid item xs={12} md={6} className={styles.fieldRow}>
                                 <Field
                                     component={TextField}
                                     name="street"
                                     label="street"
                                 />
                             </Grid>
-                            <Grid
-                                item
-                                xs={12}
-                                md={6}
-                            >
+                            <Grid item xs={12} md={6} className={styles.fieldRow}>
                                 <Field
                                     component={TextField}
                                     name="locality"
                                     label="locality"
                                 />
                             </Grid>
-                            <Grid item xs={12} >
+                            <Grid item xs={12} className={styles.fieldRow}>
                                 <Button
                                     variant="contained"
                                     color="primary"
                                     disabled={isSubmitting}
-                                    onClick={submitForm}
-                                >
+                                    onClick={submitForm}>
                                     Submit
                                 </Button>
                             </Grid>
@@ -145,3 +130,15 @@ export function FormComponent() {
         </Formik>
     );
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        fieldRow: {
+            paddingBottom: theme.spacing(2)
+        },
+        wrapper: {
+            padding: theme.spacing(2),
+            minWidth: 300,
+        }
+    })
+);

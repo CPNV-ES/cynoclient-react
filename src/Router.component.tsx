@@ -6,10 +6,10 @@ import {FormComponent} from "./client/Form.component"
 export function RouterComponent() {
     return (
         <Switch>
-            <Route path="/client/create">
+            <Route path="/clients/store">
                 <FormComponent/>
             </Route>
-            <Route path="/client">
+            <Route path="/clients/:clientId/edit">
                 <FormComponent/>
             </Route>
             <Route path="/">

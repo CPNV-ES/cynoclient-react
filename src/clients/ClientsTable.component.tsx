@@ -27,10 +27,10 @@ export function ClientsTable() {
 			<Table>
 				<TableHead>
 					<TableRow>
-						<TableCell>Firstname</TableCell>
-						<TableCell>Lastname</TableCell>
-						<TableCell>Sex</TableCell>
-						<TableCell>Phone</TableCell>
+						<TableCell>Prénom</TableCell>
+						<TableCell>Nom</TableCell>
+						<TableCell>Sexe</TableCell>
+						<TableCell>Téléphone</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>

@@ -7,13 +7,14 @@ import React from "react";
 import {useClients} from "../common/hook/Clients.hook";
 import TableBody from "@material-ui/core/TableBody";
 import {Client} from "../common/resource/Client.resource";
+import {displayClientSex} from "../common/utils/Client.utils";
 
 export function ClientRow(client: Client) {
 	return (
 		<TableRow>
 			<TableCell>{client.firstname}</TableCell>
 			<TableCell>{client.lastname}</TableCell>
-			<TableCell>{client.isFemale}</TableCell>
+			<TableCell>{displayClientSex(client)}</TableCell>
 			<TableCell>{client.phone}</TableCell>
 		</TableRow>
 	);

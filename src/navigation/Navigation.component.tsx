@@ -19,12 +19,11 @@ export function NavigationComponent() {
                     <Typography variant="h6" className={classes.title}>
                         Cynoclient
                     </Typography>
-
-                    <Button color={"inherit"} startIcon={<GroupIcon/>} onClick={() => history.push("/")}>
-                        Home
-                    </Button>
                     <Button color={"inherit"} startIcon={<GroupIcon/>} onClick={() => history.push("/clients/store")}>
                         Client
+                    </Button>
+                    <Button color={"inherit"} startIcon={<GroupIcon/>} onClick={() => history.push("/clients")}>
+                        Clients
                     </Button>
                 </Toolbar>
             </AppBar>

@@ -3,6 +3,7 @@ import React from "react";
 import {FormComponent} from "./clients/Form.component";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {ClientsIndexComponent} from "./clients/index/ClientsIndex.component";
+import {ClientsShowComponent} from "./clients/show/ClientsShow.component";
 
 export function RouterComponent() {
     return (
@@ -12,6 +13,9 @@ export function RouterComponent() {
             </Route>
             <Route path="/clients/:clientId/edit">
                 <FormComponent/>
+            </Route>
+            <Route path="/clients/:clientId/show">
+                <ClientsShowComponent/>
             </Route>
             <Route path="/clients">
                 <ClientsIndexComponent/>

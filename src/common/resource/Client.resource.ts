@@ -1,6 +1,7 @@
 import {CommonResource} from "./Common.resource";
 
 export interface Client extends CommonResource {
+    id: number,
     firstname: string,
     lastname: string,
     isFemale: boolean,

@@ -26,7 +26,7 @@ export function DogRow(dog: Dog, onClick: () => void) {
 }
 
 export function DogsTable() {
-    const {data: dogs} = useDogs();
+    const history = useHistory();
 	const {data: dogs} = useDogs();
     return (
         <TableContainer>

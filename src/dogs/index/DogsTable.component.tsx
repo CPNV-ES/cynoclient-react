@@ -12,7 +12,6 @@ export function DogRow(dog: Dog) {
 		<TableRow>
 			<TableCell>{dog.noun}</TableCell>
 			<TableCell>{displayDogSex(dog)}</TableCell>
-			<TableCell>{dog.color}</TableCell>
 		</TableRow>
 	);
 }
@@ -26,7 +25,10 @@ export function DogsTable() {
 					<TableRow>
 						<TableCell>Nom</TableCell>
 						<TableCell>Sexe</TableCell>
-						<TableCell>Couleur</TableCell>
+						<TableCell>Mort ?</TableCell>
+						<TableCell>Espèce</TableCell>
+						<TableCell>Croisement</TableCell>
+						<TableCell>Propiétaire</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>

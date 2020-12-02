@@ -25,7 +25,6 @@ export function DogShowComponent() {
                     <Grid item xs={12} md={9}>
                         <p>{dog.noun}, {displayDogSex(dog)}</p>
                     </Grid>
-
                     <Grid container item direction={"row"} justify={"space-between"} xs={12} md={3}>
                         <Grid item xs={6}>
                             <Button variant={"contained"} color={"primary"}
@@ -39,37 +38,36 @@ export function DogShowComponent() {
                                     onClick={() => alert("NOT IMPLEMENTED")}>Supprimer</Button>
                         </Grid>
                     </Grid>
-
                     <Grid item xs={12} md={12}>
                         <p>{dog.birthdate} ({!dog.isDead ? `${dogAge(dog)} ans` : "mort"})</p>
                     </Grid>
-
                     <Grid item xs={12} md={12}>
                         <p>{displayDogSterilization(dog)}</p>
                     </Grid>
-
                     <Grid item xs={12} md={12}>
                         <p>{displayDogSterilization(dog)}</p>
                     </Grid>
-
                     <Grid item xs={12} md={4}>
                         <p>{dog.color}</p>
                     </Grid>
-
                     <Grid item xs={12} md={4}>
                         <p>Espèce : {dog.breed}</p>
                     </Grid>
-
                     <Grid item xs={12} md={4}>
                         <p>Croisement : {dog.crossbreed}</p>
                     </Grid>
-
                     <Grid item xs={12} md={12}>
                         <p>Propriétaire
                             : <Link to={`/clients/${dog.id_client}/show`}>
                                 {dog.id_client}
                             </Link>
                         </p>
+                    </Grid>
+                    <Grid item xs={12} md={12}>
+                        <h2>Maladies</h2>
+                    </Grid>
+                    <Grid item xs={12} md={12}>
+                        <h2>Services</h2>
                     </Grid>
                 </Grid>
             </Paper>

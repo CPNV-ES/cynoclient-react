@@ -1,7 +1,8 @@
 import React from "react";
-import {Route, Switch} from "react-router-dom";
-import {HomeComponent} from "./home/Home.component";
-import {FormComponent} from "./client/Form.component"
+// import {HomeComponent} from "./home/Home.component";;
+import {FormComponent} from "./clients/Form.component";
+import {Redirect, Route, Switch} from "react-router-dom";
+import {ClientsIndexComponent} from "./clients/index/ClientsIndex.component";
 
 export function RouterComponent() {
     return (
@@ -12,8 +13,11 @@ export function RouterComponent() {
             <Route path="/clients/:clientId/edit">
                 <FormComponent/>
             </Route>
+            <Route path="/clients">
+                <ClientsIndexComponent/>
+            </Route>
             <Route path="/">
-                <HomeComponent/>
+                <Redirect to="/clients"/>
             </Route>
         </Switch>
     )

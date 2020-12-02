@@ -4,6 +4,7 @@ import React from "react";
 import {Dog} from "../../common/resource/Dog.resource";
 import {displayDogSex, dogAge} from "../../common/utils/Dog.utils";
 import {displayBool} from "../../common/utils/Data.utils";
+import {Link} from 'react-router-dom';
 
 export function DogRow(dog: Dog) {
     return (
@@ -14,7 +15,11 @@ export function DogRow(dog: Dog) {
             <TableCell>{dogAge(dog)}</TableCell>
             <TableCell>{dog.breed}</TableCell>
             <TableCell>{dog.crossbreed}</TableCell>
-            <TableCell>{dog.id_client}</TableCell>
+            <TableCell>
+                <Link to={`clients/${dog.id_client}/show`}>
+                    {dog.id_client}
+                </Link>
+            </TableCell>
         </TableRow>
     );
 }

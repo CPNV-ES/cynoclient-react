@@ -5,12 +5,13 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import {Dog} from "../../common/resource/Dog.resource";
+import {displayDogSex} from "../../common/utils/Dog.utils";
 
 export function DogRow(dog: Dog) {
 	return (
 		<TableRow>
 			<TableCell>{dog.noun}</TableCell>
-			<TableCell>{dog.isFemale}</TableCell>
+			<TableCell>{displayDogSex(dog)}</TableCell>
 			<TableCell>{dog.color}</TableCell>
 		</TableRow>
 	);

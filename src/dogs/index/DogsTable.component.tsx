@@ -5,10 +5,11 @@ import {Dog} from "../../common/resource/Dog.resource";
 import {displayDogSex, dogAge} from "../../common/utils/Dog.utils";
 import {displayBool} from "../../common/utils/Data.utils";
 import {Link} from 'react-router-dom';
+import {useHistory} from "react-router-dom";
 
-export function DogRow(dog: Dog) {
+export function DogRow(dog: Dog, onClick: () => void) {
     return (
-        <TableRow>
+		<TableRow hover key={dog.id} onClick={onClick}>
             <TableCell>{dog.noun}</TableCell>
             <TableCell>{displayDogSex(dog)}</TableCell>
             <TableCell>{displayBool(dog.isDead)}</TableCell>
@@ -26,6 +27,7 @@ export function DogRow(dog: Dog) {
 
 export function DogsTable() {
     const {data: dogs} = useDogs();
+	const {data: dogs} = useDogs();
     return (
         <TableContainer>
             <Table>
@@ -41,7 +43,10 @@ export function DogsTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {dogs?.map((dog) => DogRow(dog))}
+					{dogs?.map((dog) => DogRow(
+						dog,
+						() => history.push(`/dogs/${dog.id}`))
+					)}
                 </TableBody>
             </Table>
         </TableContainer>

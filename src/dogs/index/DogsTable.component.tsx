@@ -1,9 +1,6 @@
 import {useDogs} from "../../common/hook/Dogs.hook";
-import {Table, TableCell, TableContainer} from "@material-ui/core";
+import {Table, TableCell, TableContainer, TableHead, TableRow, TableBody} from "@material-ui/core";
 import React from "react";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableBody from "@material-ui/core/TableBody";
 import {Dog} from "../../common/resource/Dog.resource";
 import {displayDogSex, dogAge} from "../../common/utils/Dog.utils";
 import {displayBool} from "../../common/utils/Data.utils";

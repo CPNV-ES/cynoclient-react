@@ -5,8 +5,7 @@ import React from "react";
 import {Button, Grid, Paper} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import {displayClientSex} from "../../common/utils/Client.utils";
-import {displayDogSex} from "../../common/utils/Dog.utils";
+import {displayDogSex, displayDogSterilization, dogAge} from "../../common/utils/Dog.utils";
 
 export function DogShowComponent() {
 	const styles = useStyles();
@@ -24,7 +23,7 @@ export function DogShowComponent() {
 			<Paper className={styles.paper}>
 				<Grid container justify={"center"}>
 					<Grid item xs={12} md={9}>
-						<p>{dog.noun}</p>
+						<p>{dog.noun}, {displayDogSex(dog)}</p>
 					</Grid>
 
 					<Grid container item direction={"row"} justify={"space-between"} xs={12} md={3}>
@@ -41,24 +40,12 @@ export function DogShowComponent() {
 						</Grid>
 					</Grid>
 
-					<Grid item xs={12} md={4}>
-						<p>Sexe: {displayDogSex(dog)}</p>
+					<Grid item xs={12} md={12}>
+						<p>{dog.birthdate} ({!dog.isDead ? `${dogAge(dog)} ans` : "mort" })</p>
 					</Grid>
 
-					<Grid item xs={12} md={4}>
-						<p>Couleur: {dog.color}</p>
-					</Grid>
-
-					<Grid item xs={12} md={4}>
-						<p>Naissance: {dog.birthdate}</p>
-					</Grid>
-
-					<Grid item xs={12} md={4}>
-						<p>Statut: {dog.isDead}</p>
-					</Grid>
-
-					<Grid item xs={12} md={4}>
-						<p>Stérilization: {dog.isSterilized} ({dog.isChemical})</p>
+					<Grid item xs={12} md={12}>
+						<p>{displayDogSterilization(dog)}</p>
 					</Grid>
 				</Grid>
 			</Paper>

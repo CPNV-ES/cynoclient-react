@@ -3,6 +3,7 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import {ClientsIndexComponent} from "./clients/index/ClientsIndex.component";
 import {DogsIndexComponent} from "./dogs/index/DogsIndex.component";
 import {ClientsShowComponent} from "./clients/show/ClientsShow.component";
+import {DogShowComponent} from "./dogs/show/DogShow.component";
 
 export function RouterComponent() {
     return (
@@ -12,6 +13,9 @@ export function RouterComponent() {
             </Route>
             <Route path="/clients">
                 <ClientsIndexComponent/>
+            </Route>
+            <Route path="/dogs/:dogId">
+                <DogShowComponent/>
             </Route>
             <Route path="/dogs">
                 <DogsIndexComponent/>

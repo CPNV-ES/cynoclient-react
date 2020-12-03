@@ -19,6 +19,6 @@ export function useDogs() {
 }
 
 export function useDog(id: number) {
-    useQuery<Dog | null>([DOG_CACHE_KEY, id],
+    return useQuery<Dog | null>([DOG_CACHE_KEY, id],
         () => DogsRepository.getDog(id))
 }

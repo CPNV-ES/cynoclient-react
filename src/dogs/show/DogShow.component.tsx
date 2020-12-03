@@ -5,7 +5,9 @@ import React from "react";
 import {Button, Grid, Paper} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AddIcon from '@material-ui/icons/Add';
 import {displayDogSex, displayDogSterilization, dogAge} from "../../common/utils/Dog.utils";
+import {DogServicesTable} from "./DogServicesTable.component";
 
 export function DogShowComponent() {
     const styles = useStyles();
@@ -18,6 +20,7 @@ export function DogShowComponent() {
         return <Redirect to={"/dogs"}/>
     }
 
+    // TODO display diseases list
     return (
         <div className={styles.wrapper}>
             <Paper className={styles.paper}>
@@ -44,9 +47,6 @@ export function DogShowComponent() {
                     <Grid item xs={12} md={12}>
                         <p>{displayDogSterilization(dog)}</p>
                     </Grid>
-                    <Grid item xs={12} md={12}>
-                        <p>{displayDogSterilization(dog)}</p>
-                    </Grid>
                     <Grid item xs={12} md={4}>
                         <p>{dog.color}</p>
                     </Grid>
@@ -63,11 +63,30 @@ export function DogShowComponent() {
                             </Link>
                         </p>
                     </Grid>
-                    <Grid item xs={12} md={12}>
-                        <h2>Maladies</h2>
+                    <Grid container item direction={"row"} justify={"space-between"} xs={12} md={12}>
+                        <Grid item xs={9}>
+                            <h2>Maladies</h2>
+                        </Grid>
+
+                        <Grid item justify={"flex-end"} xs={3}>
+                            <Button variant={"contained"} color={"primary"}
+                                    startIcon={<AddIcon/>}
+                                    onClick={() => alert("NOT IMPLEMENTED")}>Ajouter</Button>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} md={12}>
-                        <h2>Services</h2>
+                    <Grid container item direction={"row"} justify={"space-between"} xs={12} md={12}>
+                        <Grid item xs={9}>
+                            <h2>Services</h2>
+                        </Grid>
+
+                        <Grid item justify={"flex-end"} xs={3}>
+                            <Button variant={"contained"} color={"primary"}
+                                    startIcon={<AddIcon/>}
+                                    onClick={() => alert("NOT IMPLEMENTED")}>Ajouter</Button>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <DogServicesTable/>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Paper>

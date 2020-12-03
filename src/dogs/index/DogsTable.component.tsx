@@ -14,7 +14,7 @@ export function DogRow(dog: Dog, onClick: () => void) {
         event.stopPropagation();
         history.push(`clients/${dog.id_client}/show`);
     }
-    
+
     return (
 		<TableRow hover key={dog.id} onClick={onClick}>
             <TableCell>{dog.noun}</TableCell>

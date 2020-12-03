@@ -1,9 +1,9 @@
-import {Client} from "../resource/Client.resource";
 import {List} from "immutable";
 import Axios from "axios";
+import {Breed} from "../resource/Breed.resource";
 
 export const BreedsRepository = {
-    getBreeds: (): Promise<List<Client>> => Axios
+    getBreeds: (): Promise<List<Breed>> => Axios
         .get(`/api/breeds`)
         .then(res => List(res.data)),
 }

@@ -16,7 +16,7 @@ export function DogRow(dog: Dog, onClick: () => void) {
     }
 
     return (
-		<TableRow hover key={dog.id} onClick={onClick}>
+        <TableRow hover key={dog.id} onClick={onClick}>
             <TableCell>{dog.noun}</TableCell>
             <TableCell>{displayDogSex(dog)}</TableCell>
             <TableCell>{displayBool(dog.isDead)}</TableCell>
@@ -24,7 +24,7 @@ export function DogRow(dog: Dog, onClick: () => void) {
             <TableCell>{dog.breed}</TableCell>
             <TableCell>{dog.crossbreed}</TableCell>
             <TableCell onClick={onClientClick}>
-                    {dog.id_client}
+                {dog.id_client}
             </TableCell>
         </TableRow>
     );
@@ -32,7 +32,7 @@ export function DogRow(dog: Dog, onClick: () => void) {
 
 export function DogsTable() {
     const history = useHistory();
-	const {data: dogs} = useDogs();
+    const {data: dogs} = useDogs();
     return (
         <TableContainer>
             <Table>
@@ -48,10 +48,10 @@ export function DogsTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-					{dogs?.map((dog) => DogRow(
-						dog,
-						() => history.push(`/dogs/${dog.id}`))
-					)}
+                    {dogs?.map((dog) => DogRow(
+                        dog,
+                        () => history.push(`/dogs/${dog.id}`))
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>

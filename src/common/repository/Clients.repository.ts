@@ -9,7 +9,12 @@ export const ClientsRepository = {
 
     getClient: (id: number): Promise<Client | null> => Axios
         .get(`/api/clients/${id}`)
-        .then(res => res.data ? parseJsonToClient(res.data) : null)
+        .then(res => res.data ? parseJsonToClient(res.data) : null),
+
+    postClient: (client: Client) => Axios
+        .post(`/api/clients`, client),
+    patchClient: (client: Client) => Axios
+        .patch(`/api/clients`, client),
 }
 
 function parseJsonArrayToClients(axiosResponse: AxiosResponse<any[]>): List<Client> {

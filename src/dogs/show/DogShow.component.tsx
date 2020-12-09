@@ -8,17 +8,25 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from '@material-ui/icons/Add';
 import {displayDogSex, displayDogSterilization, dogAge} from "../../common/utils/Dog.utils";
 import {DogServicesTable} from "./DogServicesTable.component";
+import {useClient} from "../../common/hook/Clients.hook";
+import {Dog} from "../../common/resource/Dog.resource";
+import {clientFullName} from "../../common/utils/Client.utils";
 
 export function DogShowComponent() {
-    const styles = useStyles();
     const route = useParams<{ dogId: string }>();
-    const history = useHistory();
-
     const {data: dog} = useDog(Number(route.dogId));
-
     if (!dog) {
         return <Redirect to={"/dogs"}/>
     }
+
+    // workaround tu be able use useClient(dog.id_client), which requires a non-null dog
+    return DogShowContentComponent(dog);
+}
+
+function DogShowContentComponent(dog: Dog) {
+    const styles = useStyles();
+    const history = useHistory();
+    const {data: owner} = useClient(dog.id_client);
 
     // TODO display diseases list
     return (
@@ -59,7 +67,7 @@ export function DogShowComponent() {
                     <Grid item xs={12} md={12}>
                         <p>Propriétaire
                             : <Link to={`/clients/${dog.id_client}/show`}>
-                                {dog.id_client}
+                                {clientFullName(owner)}
                             </Link>
                         </p>
                     </Grid>

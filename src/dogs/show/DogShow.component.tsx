@@ -11,6 +11,7 @@ import {DogServicesTable} from "./DogServicesTable.component";
 import {useClient} from "../../common/hook/Clients.hook";
 import {Dog} from "../../common/resource/Dog.resource";
 import {clientFullName} from "../../common/utils/Client.utils";
+import {useBreed} from "../../common/hook/Breeds.hook";
 
 export function DogShowComponent() {
     const route = useParams<{ dogId: string }>();
@@ -27,6 +28,8 @@ function DogShowContentComponent(dog: Dog) {
     const styles = useStyles();
     const history = useHistory();
     const {data: owner} = useClient(dog.id_client);
+    const {data: breed} = useBreed(dog.breed);
+    const {data: crossbreed} = useBreed(dog.crossbreed);
 
     // TODO display diseases list
     return (
@@ -59,10 +62,10 @@ function DogShowContentComponent(dog: Dog) {
                         <p>{dog.color}</p>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <p>Espèce : {dog.breed}</p>
+                        <p>Espèce : {breed?.noun}</p>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <p>Croisement : {dog.crossbreed}</p>
+                        <p>Croisement : {crossbreed?.noun}</p>
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <p>Propriétaire

@@ -1,7 +1,6 @@
 import {CommonResource} from "./Common.resource";
 
 export interface Dog extends CommonResource {
-    id: number,
     noun: string,
     isFemale: boolean,
     birthdate: string,

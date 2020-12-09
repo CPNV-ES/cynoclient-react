@@ -65,7 +65,7 @@ export function BreedsIndexComponent() {
             <Grid container>
                 <Grid item xs={12} md={6}>
                     <Typography gutterBottom variant="h3">
-                        Breeds
+                        Races
                     </Typography>
                 </Grid>
 
@@ -89,7 +89,7 @@ export function BreedsIndexComponent() {
 
             <Grid container>
                 {breeds?.filter((breed: Breed) => {
-                    if(filteredCategory === -1) {
+                    if (filteredCategory === -1) {
                         return true
                     }
 

@@ -9,4 +9,5 @@ export const DogsRepository = {
 
     getDog: (id: number): Promise<Dog | null> => Axios
         .get(`/api/dogs/${id}`)
+        .then(res => res.data),
 }

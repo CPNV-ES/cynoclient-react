@@ -2,7 +2,7 @@ import {CommonResource} from "./Common.resource";
 
 export interface Breed extends CommonResource {
     link: string,
-    picture: string,
+    picture: string | null,
     noun: string,
     id_category: number,
     morphotype: string,

@@ -8,6 +8,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import GroupIcon from '@material-ui/icons/Group';
 import {useHistory} from 'react-router-dom';
 import PetsIcon from '@material-ui/icons/Pets';
+import AdbIcon from '@material-ui/icons/Adb';
 
 export function NavigationComponent() {
     const classes = useStyles();
@@ -23,6 +24,9 @@ export function NavigationComponent() {
 
                     <Button color={"inherit"} startIcon={<GroupIcon/>} onClick={() => history.push("/clients")}>
                         Clients
+                    </Button>
+                    <Button color={"inherit"} startIcon={<AdbIcon/>} onClick={() => history.push("/breeds")}>
+                        Breeds
                     </Button>
                     <Button color={"inherit"} startIcon={<PetsIcon/>} onClick={() => history.push("/dogs")}>
                         Chiens

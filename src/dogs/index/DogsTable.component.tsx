@@ -7,10 +7,12 @@ import {displayBool} from "../../common/utils/Data.utils";
 import {useHistory} from "react-router-dom";
 import {useClient} from "../../common/hook/Clients.hook";
 import {clientFullName} from "../../common/utils/Client.utils";
+import {useBreed} from "../../common/hook/Breeds.hook";
 
 export function DogRow(dog: Dog, onClick: () => void) {
     const history = useHistory();
     const {data: owner} = useClient(dog.id_client);
+    const {data: breed} = useBreed(dog.breed);
 
     // Infer event type from its usage
     const onClientClick = (event: { stopPropagation: () => void; }) => {
@@ -24,7 +26,7 @@ export function DogRow(dog: Dog, onClick: () => void) {
             <TableCell>{displayDogSex(dog)}</TableCell>
             <TableCell>{displayBool(dog.isDead)}</TableCell>
             <TableCell>{dogAge(dog)}</TableCell>
-            <TableCell>{dog.breed}</TableCell>
+            <TableCell>{breed?.noun}</TableCell>
             <TableCell>{dog.crossbreed}</TableCell>
             <TableCell onClick={onClientClick}>
                 {clientFullName(owner)}

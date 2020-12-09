@@ -13,6 +13,7 @@ export function DogRow(dog: Dog, onClick: () => void) {
     const history = useHistory();
     const {data: owner} = useClient(dog.id_client);
     const {data: breed} = useBreed(dog.breed);
+    const {data: crossbreed} = useBreed(dog.crossbreed);
 
     // Infer event type from its usage
     const onClientClick = (event: { stopPropagation: () => void; }) => {
@@ -27,7 +28,7 @@ export function DogRow(dog: Dog, onClick: () => void) {
             <TableCell>{displayBool(dog.isDead)}</TableCell>
             <TableCell>{dogAge(dog)}</TableCell>
             <TableCell>{breed?.noun}</TableCell>
-            <TableCell>{dog.crossbreed}</TableCell>
+            <TableCell>{crossbreed?.noun}</TableCell>
             <TableCell onClick={onClientClick}>
                 {clientFullName(owner)}
             </TableCell>

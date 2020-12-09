@@ -8,13 +8,15 @@ export function AppComponent() {
     return (
         <ProviderComponent>
             <div>
-                <NavigationComponent/>
-                <Suspense fallback={<LoaderComponent/>}>
-                    <div>
-                        <RouterComponent/>
-                    </div>
-                </Suspense>
+                <NavigationComponent>
+                    <Suspense fallback={<LoaderComponent/>}>
+                        <div>
+                            <RouterComponent/>
+                        </div>
+                    </Suspense>
+                </NavigationComponent>
             </div>
         </ProviderComponent>
     );
 }
+

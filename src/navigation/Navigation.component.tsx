@@ -39,7 +39,7 @@ export function NavigationComponent(props: PropsWithChildren<any>) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="fixed" className={clsx(classes.appBar, {
+            <AppBar color={"inherit"} position="fixed" className={clsx(classes.appBar, {
                 [classes.appBarShift]: isDrawerOpen,
             })}>
                 <Toolbar>

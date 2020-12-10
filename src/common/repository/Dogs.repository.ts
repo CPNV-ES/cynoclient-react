@@ -4,10 +4,10 @@ import {List} from "immutable";
 
 export const DogsRepository = {
     getDogs: (): Promise<List<Dog>> => Axios
-        .get<Dog[]>(`/api/dogs`)
+        .get<Dog[]>(`/api/dogs?with[]=client`)
         .then(res => List(res.data)),
 
     getDog: (id: number): Promise<Dog | null> => Axios
-        .get(`/api/dogs/${id}`)
+        .get(`/api/dogs/${id}?with[]=client`)
         .then(res => res.data),
 }

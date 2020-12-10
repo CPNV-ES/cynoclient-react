@@ -67,8 +67,6 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                     street: values.street,
                     locality: values.locality,
                 }
-                console.log(customClient);
-
                 return props.isEditing ? editClient(customClient) : createClient(customClient)
             }}
         >
@@ -127,10 +125,7 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                                     getOptionSelected={option => option}
                                     defaultValue={ {zip: client?.locality?.zip || "", noun: client?.locality?.noun || ""}}
                                     renderInput={params => (
-                                        <div>
-                                            {console.log(client)}
                                         <Field component={TextField} {...params} name="locality_temp" label="localité"/>
-                                        </div>
                                     )}
                                     onChange={(event, value: Locality) => {
                                         setFieldValue("locality", value || null)

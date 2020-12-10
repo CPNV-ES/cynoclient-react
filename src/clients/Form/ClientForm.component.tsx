@@ -1,35 +1,37 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, createStyles, Grid, InputLabel, MenuItem, Theme} from "@material-ui/core";
 import {Autocomplete} from '@material-ui/lab';
 import {Select, TextField} from 'formik-material-ui';
-import {Field, Formik, useFormik} from 'formik';
+import {Field, Formik} from 'formik';
 import * as Yup from 'yup';
 import "yup-phone";
 import {makeStyles} from "@material-ui/core/styles";
-import {useHistory, useParams} from "react-router-dom";
-import {useClient, createClient} from "../common/hook/Clients.hook";
-import {useLocalities} from "../common/hook/Locality.hook";
-import {Locality} from "../common/resource/Locality.resource";
+import {useParams} from "react-router-dom";
+import {useClientWithLocality, useEditClient, useCreateClient} from "../../common/hook/Clients.hook";
+import {useLocalities} from "../../common/hook/Locality.hook";
+import {Locality} from "../../common/resource/Locality.resource";
+import {Client} from "../../common/resource/Client.resource";
 
-export function FormComponent() {
-    const history = useHistory(); //use to navigate (like navigate on react-native)
+export function ClientFormComponent(props: { isEditing: boolean }) {
+
     const route = useParams<{ clientId?: string }>();
     const styles = useStyles();
-    const {data: client} = useClient(Number(route.clientId || -1))
+    const {data: client} = useClientWithLocality(Number(route.clientId || -1))
+    const [editClient] = useEditClient();
+    const [createClient] = useCreateClient();
     const {data: localities} = useLocalities();
-    const [formdata, setFormdata] = useState({
-        firstname: client ? client.firstname : '',
-        lastname: client ? client.lastname : '',
-        phone: client ? client.phone : '',
-        email: client ? client.email : '',
-        isFemale: client ? client.isFemale : true,
-        street: client ? client.street : '',
-        locality: client ? client.locality : null,
-    });
 
     return (
         <Formik
-            initialValues={formdata}
+            initialValues={{
+                firstname: props.isEditing ? client?.firstname || '' : '',
+                lastname: props.isEditing ? client?.lastname || '' : '',
+                phone: props.isEditing ? client?.phone || '' : '',
+                email: props.isEditing ? client?.email || '' : '',
+                isFemale: props.isEditing ? client?.isFemale || true : true,
+                street: props.isEditing ? client?.street || '' : '',
+                locality: props.isEditing ? client?.locality || null : null,
+            }}
             validationSchema={Yup.object({
                 firstname: Yup.string()
                     .min(2)
@@ -53,9 +55,10 @@ export function FormComponent() {
                     .max(255, 'Trop long!')
                     .required("Veuillez entrer un nom et numéro de rue (example: Rue de Genève 77)"),
             })}
-            onSubmit={(values, {setSubmitting}) => {
-                createClient({
-                    id: -1,
+            onSubmit={(values) => {
+                var id:number = props.isEditing ? (client?.id || -1) : NaN;
+                var customClient:Client = {
+                    id: id,
                     firstname: values.firstname,
                     lastname: values.lastname,
                     phone: values.phone,
@@ -63,10 +66,10 @@ export function FormComponent() {
                     isFemale: values.isFemale,
                     street: values.street,
                     locality: values.locality,
-                    id_locality: values.locality?.id || null
-                })
-                console.log(values)
-                setSubmitting(false);
+                }
+                console.log(customClient);
+
+                return props.isEditing ? editClient(customClient) : createClient(customClient)
             }}
         >
             {({submitForm, isSubmitting,setFieldValue}) => (
@@ -121,12 +124,15 @@ export function FormComponent() {
                                 <Autocomplete
                                     options={localities?.toJS() || [{noun: ""}] }
                                     getOptionLabel={option => `${option.zip} ${option.noun}`}
-                                    defaultValue={{zip: client?.locality?.zip, noun: client?.locality?.noun}}
+                                    getOptionSelected={option => option}
+                                    defaultValue={ {zip: client?.locality?.zip || "", noun: client?.locality?.noun || ""}}
                                     renderInput={params => (
+                                        <div>
+                                            {console.log(client)}
                                         <Field component={TextField} {...params} name="locality_temp" label="localité"/>
+                                        </div>
                                     )}
                                     onChange={(event, value: Locality) => {
-                                        console.log(value)
                                         setFieldValue("locality", value || null)
                                     }}
                                 />

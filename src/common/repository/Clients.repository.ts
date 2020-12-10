@@ -1,11 +1,11 @@
 import {Client} from "../resource/Client.resource";
 import {List} from "immutable";
-import Axios, {AxiosResponse} from "axios";
+import Axios from "axios";
 
 export const ClientsRepository = {
     getClients: (): Promise<List<Client>> => Axios
         .get(`/api/clients`)
-        .then(parseJsonArrayToClients),
+        .then(res => List(res.data)),
 
     getClient: (id: number): Promise<Client | null> => Axios
         .get(`/api/clients/${id}`)
@@ -20,10 +20,6 @@ export const ClientsRepository = {
 
     patchClient: (client: Client) => Axios
         .patch(`/api/clients/${client.id}`, client),
-}
-
-function parseJsonArrayToClients(axiosResponse: AxiosResponse<any[]>): List<Client> {
-    return List(axiosResponse.data.map(parseJsonToClient));
 }
 
 function parseJsonToClient(json: any): Client {

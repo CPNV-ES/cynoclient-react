@@ -1,5 +1,5 @@
 import {ClientsRepository} from "../repository/Clients.repository";
-import {useQuery, useQueryCache} from "react-query";
+import {useMutation, useQuery, useQueryCache} from "react-query";
 import {Client} from "../resource/Client.resource";
 import {List} from "immutable";
 
@@ -25,4 +25,32 @@ export function useClients() {
 export function useClient(id: number) {
     return useQuery<Client | null>([CLIENT_CACHE_KEY, id],
         () => ClientsRepository.getClient(id))
+}
+
+export function useClientWithLocality(id: number) {
+    return useQuery<Client | null>([CLIENT_CACHE_KEY, id],
+        () => ClientsRepository.getClientWithLocality(id))
+}
+
+export function useCreateClient(){
+    const cache = useQueryCache();
+    return useMutation(
+        (client: Client) => ClientsRepository.postClient(client),
+        {
+            onSuccess: () => {
+                cache.invalidateQueries(CLIENT_CACHE_KEY);
+            },
+        }
+    )
+}
+export function useEditClient(){
+    const cache = useQueryCache();
+    return useMutation(
+        (client: Client) => ClientsRepository.patchClient(client),
+        {
+            onSuccess: () => {
+                cache.invalidateQueries(CLIENT_CACHE_KEY);
+            },
+        }
+    )
 }

@@ -11,10 +11,15 @@ export const ClientsRepository = {
         .get(`/api/clients/${id}`)
         .then(res => res.data ? parseJsonToClient(res.data) : null),
 
+    getClientWithLocality: (id: number): Promise<Client | null> => Axios
+        .get(`/api/clients/${id}?with[]=locality`)
+        .then(res => res.data ? parseJsonToClient(res.data) : null),
+
     postClient: (client: Client) => Axios
         .post(`/api/clients`, client),
+
     patchClient: (client: Client) => Axios
-        .patch(`/api/clients`, client),
+        .patch(`/api/clients/${client.id}`, client),
 }
 
 function parseJsonArrayToClients(axiosResponse: AxiosResponse<any[]>): List<Client> {

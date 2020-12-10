@@ -8,7 +8,6 @@ export interface Client extends CommonResource {
     email: string | null,
     phone: string,
     street: string,
-    id_locality: number | null,
     locality: Locality | null,
 }
 

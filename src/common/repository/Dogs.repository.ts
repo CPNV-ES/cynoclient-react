@@ -4,7 +4,7 @@ import {List} from "immutable";
 
 export const DogsRepository = {
     getDogs: (): Promise<List<Dog>> => Axios
-        .get(`/api/dogs`)
+        .get(`/api/dogs?with[]=client`)
         .then(res => List(res.data)),
 
     getDog: (id: number): Promise<Dog | null> => Axios

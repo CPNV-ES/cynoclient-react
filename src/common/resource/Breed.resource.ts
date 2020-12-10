@@ -1,10 +1,14 @@
 import {CommonResource} from "./Common.resource";
 
+export interface Category extends CommonResource {
+    noun: string
+}
+
 export interface Breed extends CommonResource {
     link: string,
     picture: string | null,
     noun: string,
-    id_category: number,
+    category: Category | null,
     morphotype: string,
     classification: string,
     min_size_female: number,

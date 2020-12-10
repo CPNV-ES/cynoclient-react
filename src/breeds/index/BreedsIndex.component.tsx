@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import {Breed} from "../../common/resource/Breed.resource";
 import {makeStyles} from "@material-ui/core/styles";
-import {Set} from "immutable";
+import {Map} from "immutable";
 
 export function BreedsIndexComponent() {
     const theme = useTheme();
@@ -24,11 +24,14 @@ export function BreedsIndexComponent() {
     const {data: breeds} = useBreeds();
     const [filteredCategory, setFilteredCategory] = useState<number>(-1);
 
-    const categories: Set<number> = useMemo(() => {
-        let result = Set();
+    const categories: Map<number, string> = useMemo(() => {
+        let result = Map<number, string>();
 
         if (breeds) {
-            breeds.forEach((breed) => result = result.add(breed.id_category))
+            breeds.forEach((breed) => {
+                if(breed.category)
+                    result = result.set(breed.category.id, breed.category.noun)
+            })
         }
 
         return result.sort();
@@ -65,12 +68,12 @@ export function BreedsIndexComponent() {
             <Grid container>
                 <Grid item xs={12} md={6}>
                     <Typography gutterBottom variant="h3">
-                        Breeds
+                        Races
                     </Typography>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <FormControl className={styles.selectFilter}>
+                    <FormControl fullWidth={true}>
                         <InputLabel id={"categoryFilterLabel"}>Categories</InputLabel>
 
                         <Select
@@ -80,7 +83,7 @@ export function BreedsIndexComponent() {
                         >
                             <MenuItem value={-1}>Aucun</MenuItem>
                             {
-                                categories.map(value => <MenuItem key={value} value={value}>{value}</MenuItem>)
+                                categories.map((value, key) => <MenuItem key={key} value={key}>{value}</MenuItem>)
                             }
                         </Select>
                     </FormControl>
@@ -89,11 +92,15 @@ export function BreedsIndexComponent() {
 
             <Grid container>
                 {breeds?.filter((breed: Breed) => {
-                    if(filteredCategory === -1) {
+                    if (filteredCategory === -1) {
                         return true
                     }
 
-                    return breed.id_category === filteredCategory
+                    if (!breed.category) {
+                        return false
+                    }
+
+                    return filteredCategory === breed.category.id
                 }).map(renderItem)}
             </Grid>
         </div>
@@ -102,9 +109,6 @@ export function BreedsIndexComponent() {
 
 const useStyles = makeStyles((theme: Theme) => {
     return {
-        selectFilter: {
-            width: 100
-        },
         cardWrapper: {
             margin: theme.spacing(2),
         },

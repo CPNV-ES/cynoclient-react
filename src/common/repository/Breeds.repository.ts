@@ -4,6 +4,6 @@ import {Breed} from "../resource/Breed.resource";
 
 export const BreedsRepository = {
     getBreeds: (): Promise<List<Breed>> => Axios
-        .get(`/api/breeds`)
+        .get<Breed[]>(`/api/breeds`)
         .then(res => List(res.data)),
 }

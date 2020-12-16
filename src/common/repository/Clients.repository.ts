@@ -4,7 +4,7 @@ import Axios from "axios";
 
 export const ClientsRepository = {
     getClients: (): Promise<List<Client>> => Axios
-        .get(`/api/clients`)
+        .get<Client[]>(`/api/clients`)
         .then(res => List(res.data)),
 
     getClient: (id: number): Promise<Client | null> => Axios

@@ -1,5 +1,6 @@
 import {CommonResource} from "./Common.resource";
 import {Client} from "./Client.resource";
+import {Breed} from "./Breed.resource";
 
 export interface Dog extends CommonResource {
     noun: string,
@@ -9,7 +10,7 @@ export interface Dog extends CommonResource {
     isChemical: boolean,
     color: string,
     isDead: boolean,
-    breed: number,
-    crossbreed: number,
+    breed: Breed,
+    crossbreed: Breed,
     client: Client,
 }

@@ -1,4 +1,5 @@
 import {CommonResource} from "./Common.resource";
+import {Locality} from "./Locality.resource";
 
 export interface Client extends CommonResource {
     firstname: string,
@@ -7,6 +8,6 @@ export interface Client extends CommonResource {
     email: string | null,
     phone: string,
     street: string,
-    id_locality: number
+    locality: Locality | null,
 }
 

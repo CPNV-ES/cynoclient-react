@@ -1,4 +1,6 @@
 import React from "react";
+// import {HomeComponent} from "./home/Home.component";;
+import {ClientFormComponent} from "./clients/Form/ClientForm.component";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {ClientsIndexComponent} from "./clients/index/ClientsIndex.component";
 import {DogsIndexComponent} from "./dogs/index/DogsIndex.component";
@@ -9,6 +11,12 @@ import {DogShowComponent} from "./dogs/show/DogShow.component";
 export function RouterComponent() {
     return (
         <Switch>
+            <Route path="/clients/create">
+                <ClientFormComponent isEditing={false}/>
+            </Route>
+            <Route path="/clients/:clientId/edit">
+                <ClientFormComponent isEditing={true}/>
+            </Route>
             <Route path="/clients/:clientId/show">
                 <ClientsShowComponent/>
             </Route>

@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import "yup-phone";
 import {makeStyles} from "@material-ui/core/styles";
 import {useParams} from "react-router-dom";
-import {useClientWithLocality, useEditClient, useCreateClient} from "../../common/hook/Clients.hook";
+import {useClient, useEditClient, useCreateClient} from "../../common/hook/Clients.hook";
 import {useLocalities} from "../../common/hook/Locality.hook";
 import {Locality} from "../../common/resource/Locality.resource";
 import {Client} from "../../common/resource/Client.resource";
@@ -16,10 +16,11 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
 
     const route = useParams<{ clientId?: string }>();
     const styles = useStyles();
-    const {data: client} = useClientWithLocality(Number(route.clientId || -1))
+    const {data: client} = useClient(Number(route.clientId || -1))
     const [editClient] = useEditClient();
     const [createClient] = useCreateClient();
     const {data: localities} = useLocalities();
+    const defaultLocation = {zip: client?.locality?.zip || "", noun: client?.locality?.noun || ""};
 
     return (
         <Formik
@@ -56,8 +57,8 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                     .required("Veuillez entrer un nom et numéro de rue (example: Rue de Genève 77)"),
             })}
             onSubmit={(values) => {
-                var id:number = props.isEditing ? (client?.id || -1) : NaN;
-                var customClient:Client = {
+                const id: number = props.isEditing ? (client?.id || -1) : NaN;
+                const customClient: Client = {
                     id: id,
                     firstname: values.firstname,
                     lastname: values.lastname,
@@ -123,7 +124,7 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                                     options={localities?.toJS() || [{noun: ""}] }
                                     getOptionLabel={option => `${option.zip} ${option.noun}`}
                                     getOptionSelected={option => option}
-                                    defaultValue={ {zip: client?.locality?.zip || "", noun: client?.locality?.noun || ""}}
+                                    defaultValue={ defaultLocation }
                                     renderInput={params => (
                                         <Field component={TextField} {...params} name="locality_temp" label="localité"/>
                                     )}

@@ -27,11 +27,6 @@ export function useClient(id: number) {
         () => ClientsRepository.getClient(id))
 }
 
-export function useClientWithLocality(id: number) {
-    return useQuery<Client | null>([CLIENT_CACHE_KEY, id],
-        () => ClientsRepository.getClientWithLocality(id))
-}
-
 export function useCreateClient(){
     const cache = useQueryCache();
     return useMutation(

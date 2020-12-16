@@ -9,4 +9,5 @@ export const ClientsRepository = {
 
     getClient: (id: number): Promise<Client | null> => Axios
         .get(`/api/clients/${id}`)
+        .then(res => res.data),
 }

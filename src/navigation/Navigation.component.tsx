@@ -19,6 +19,7 @@ import {useHistory} from 'react-router-dom';
 import PetsIcon from '@material-ui/icons/Pets';
 import AdbIcon from '@material-ui/icons/Adb';
 import MenuIcon from '@material-ui/icons/Menu';
+import HealingIcon from '@material-ui/icons/Healing';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import clsx from 'clsx';
 
@@ -75,6 +76,7 @@ export function NavigationComponent(props: PropsWithChildren<any>) {
                     {navigationItem("Clients", "/clients", <GroupIcon/>)}
                     {navigationItem("Races", "/breeds", <AdbIcon/>)}
                     {navigationItem("Chiens", "/dogs", <PetsIcon/>)}
+                    {navigationItem("Diseases", "/diseases", <HealingIcon/>)}
                 </List>
             </Drawer>
             <main className={clsx(classes.content, {

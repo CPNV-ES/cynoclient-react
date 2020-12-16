@@ -8,6 +8,7 @@ import {useHistory} from "react-router-dom";
 import {clientFullName} from "../../common/utils/Client.utils";
 import {Client} from "../../common/resource/Client.resource";
 import {Breed} from "../../common/resource/Breed.resource";
+import Paper from "@material-ui/core/Paper";
 
 export function DogRow(dog: Dog, onClick: () => void) {
     const history = useHistory();
@@ -40,7 +41,7 @@ export function DogsTable() {
     const history = useHistory();
     const {data: dogs} = useDogs();
     return (
-        <TableContainer>
+        <TableContainer component={Paper}>
             <Table>
                 <TableHead>
                     <TableRow>

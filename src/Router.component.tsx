@@ -11,7 +11,7 @@ import {DogShowComponent} from "./dogs/show/DogShow.component";
 export function RouterComponent() {
     return (
         <Switch>
-            <Route path="/clients/store">
+            <Route path="/clients/create">
                 <ClientFormComponent isEditing={false}/>
             </Route>
             <Route path="/clients/:clientId/edit">

@@ -8,17 +8,22 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from '@material-ui/icons/Add';
 import {displayDogSex, displayDogSterilization, dogAge} from "../../common/utils/Dog.utils";
 import {DogServicesTable} from "./DogServicesTable.component";
+import {clientFullName} from "../../common/utils/Client.utils";
+import {Client} from "../../common/resource/Client.resource";
+import {Breed} from "../../common/resource/Breed.resource";
 
 export function DogShowComponent() {
-    const styles = useStyles();
     const route = useParams<{ dogId: string }>();
-    const history = useHistory();
-
     const {data: dog} = useDog(Number(route.dogId));
-
+    const styles = useStyles();
+    const history = useHistory();
     if (!dog) {
         return <Redirect to={"/dogs"}/>
     }
+    
+    const breed: Breed = dog.breed;
+    const crossbreed: Breed = dog.crossbreed;
+    const owner: Client = dog.client;
 
     // TODO display diseases list
     return (
@@ -51,15 +56,15 @@ export function DogShowComponent() {
                         <p>{dog.color}</p>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <p>Espèce : {dog.breed}</p>
+                        <p>Espèce : {breed?.noun}</p>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <p>Croisement : {dog.crossbreed}</p>
+                        <p>Croisement : {crossbreed?.noun}</p>
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <p>Propriétaire
-                            : <Link to={`/clients/${dog.id_client}/show`}>
-                                {dog.id_client}
+                            : <Link to={`/clients/${owner.id}/show`}>
+                                {clientFullName(owner)}
                             </Link>
                         </p>
                     </Grid>

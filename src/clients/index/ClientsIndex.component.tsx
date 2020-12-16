@@ -1,6 +1,6 @@
 import React from "react";
 import {ClientsTable} from "./ClientsTable.component";
-import {Button, createStyles, Grid, Theme} from "@material-ui/core";
+import {createStyles, Theme} from "@material-ui/core";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import {useHistory} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";

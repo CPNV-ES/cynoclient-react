@@ -20,10 +20,9 @@ export function DogShowComponent() {
     if (!dog) {
         return <Redirect to={"/dogs"}/>
     }
-
-
+    
     const breed: Breed = dog.breed;
-    const crossbreed = dog.crossbreed;
+    const crossbreed: Breed = dog.crossbreed;
     const owner: Client = dog.client;
 
     // TODO display diseases list

@@ -13,7 +13,7 @@ import Paper from "@material-ui/core/Paper";
 export function DogRow(dog: Dog, onClick: () => void) {
     const history = useHistory();
     const breed: Breed = dog.breed;
-    const crossbreed = dog.crossbreed;
+    const crossbreed: Breed = dog.crossbreed;
     const owner: Client = dog.client;
 
     // Infer event type from its usage

@@ -1,7 +1,7 @@
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {Link, Redirect, useHistory, useParams} from "react-router-dom";
 import {useDog} from "../../common/hook/Dogs.hook";
-import React from "react";
+import React, {useState} from "react";
 import {Button, Grid, Paper} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -11,16 +11,19 @@ import {DogServicesTable} from "./DogServicesTable.component";
 import {clientFullName} from "../../common/utils/Client.utils";
 import {Client} from "../../common/resource/Client.resource";
 import {Breed} from "../../common/resource/Breed.resource";
+import {DogDiseaseFormComponent} from "./DogDiseaseForm.component";
 
 export function DogShowComponent() {
     const route = useParams<{ dogId: string }>();
     const {data: dog} = useDog(Number(route.dogId));
     const styles = useStyles();
     const history = useHistory();
+    const [displayDiseaseForm, setDisplayDiseaseForm] = useState<boolean>(false);
+
     if (!dog) {
         return <Redirect to={"/dogs"}/>
     }
-    
+
     const breed: Breed = dog.breed;
     const crossbreed: Breed = dog.crossbreed;
     const owner: Client = dog.client;
@@ -71,12 +74,13 @@ export function DogShowComponent() {
                     <Grid container item direction={"row"} justify={"space-between"} xs={12} md={12}>
                         <Grid item xs={9}>
                             <h2>Maladies</h2>
+                            {displayDiseaseForm && <DogDiseaseFormComponent/>}
                         </Grid>
 
                         <Grid item justify={"flex-end"} xs={3}>
                             <Button variant={"contained"} color={"primary"}
                                     startIcon={<AddIcon/>}
-                                    onClick={() => alert("NOT IMPLEMENTED")}>Ajouter</Button>
+                                    onClick={() => setDisplayDiseaseForm(true)}>Ajouter</Button>
                         </Grid>
                     </Grid>
                     <Grid container item direction={"row"} justify={"space-between"} xs={12} md={12}>

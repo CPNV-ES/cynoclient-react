@@ -10,8 +10,8 @@ import {displayDogSex, displayDogSterilization, dogAge} from "../../common/utils
 import {DogServicesTable} from "./DogServicesTable.component";
 import {Dog} from "../../common/resource/Dog.resource";
 import {clientFullName} from "../../common/utils/Client.utils";
-import {useBreed} from "../../common/hook/Breeds.hook";
 import {Client} from "../../common/resource/Client.resource";
+import {Breed} from "../../common/resource/Breed.resource";
 
 export function DogShowComponent() {
     const route = useParams<{ dogId: string }>();
@@ -27,8 +27,8 @@ export function DogShowComponent() {
 function DogShowContentComponent(dog: Dog) {
     const styles = useStyles();
     const history = useHistory();
-    const {data: breed} = useBreed(dog.breed);
-    const {data: crossbreed} = useBreed(dog.crossbreed);
+    const breed: Breed = dog.breed;
+    const crossbreed = dog.crossbreed;
     const owner: Client = dog.client;
 
     // TODO display diseases list

@@ -19,6 +19,7 @@ import {useHistory} from 'react-router-dom';
 import PetsIcon from '@material-ui/icons/Pets';
 import AdbIcon from '@material-ui/icons/Adb';
 import MenuIcon from '@material-ui/icons/Menu';
+import RoomServiceIcon from '@material-ui/icons/RoomService';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import clsx from 'clsx';
 import {useDrawerTransitionChangeValue} from "../common/hook/Navigation.hook";
@@ -79,6 +80,7 @@ export function NavigationComponent(props: PropsWithChildren<any>) {
                     {navigationItem("Clients", "/clients", <GroupIcon/>)}
                     {navigationItem("Races", "/breeds", <AdbIcon/>)}
                     {navigationItem("Chiens", "/dogs", <PetsIcon/>)}
+                    {navigationItem("Services", "/services", <RoomServiceIcon/>)}
                 </List>
             </Drawer>
             <main className={clsx(classes.content, {

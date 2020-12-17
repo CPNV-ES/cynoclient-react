@@ -5,8 +5,10 @@ import {MasonryScroller, RenderComponentProps, useContainerPosition, usePosition
 import {BreedsMasonryCard} from "./BreedsMasonryCard.component";
 import {useWindowSize} from '@react-hook/window-size'
 import {useDrawerTransitionChangeValue} from "../../common/hook/Navigation.hook";
+import {useHistory} from "react-router-dom";
 
 export function BreedsMasonry({breeds}: { breeds: List<Breed> }) {
+    const history = useHistory();
     const [drawerTransitionValue] = useDrawerTransitionChangeValue();
     const containerRef = React.useRef(null)
 
@@ -25,7 +27,7 @@ export function BreedsMasonry({breeds}: { breeds: List<Breed> }) {
 
     const renderItem = (props: RenderComponentProps<Breed>) => {
         return (
-            <div style={{width: props.width}}>
+            <div style={{width: props.width}} onClick={() => history.push(`/breeds/${props.data.id}`)}>
                 <BreedsMasonryCard breed={props.data}/>
             </div>
         );

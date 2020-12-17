@@ -19,7 +19,8 @@ export function BreedsMasonry({breeds}: { breeds: List<Breed> }) {
     ])
 
     const positioner = usePositioner({width, columnWidth: 400}, [
-        width
+        width,
+        breeds
     ])
 
     const renderItem = (props: RenderComponentProps<Breed>) => {

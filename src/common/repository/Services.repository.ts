@@ -4,6 +4,6 @@ import {Service} from "../resource/Service.resource";
 
 export const ServicesRepository = {
     getServices: (): Promise<List<Service>> => Axios
-        .get(`/api/services`)
+        .get<Service[]>(`/api/services`)
         .then(res => List(res.data)),
 }

@@ -8,9 +8,9 @@ export function displayServiceDuration(service: Service): String {
 	const minutes = Math.round(duration%60);
 
 	if (hour > 0)
-		result += hour+"h ";
+		result += `${hour}h `;
 	if (minutes > 0)
-		result += minutes+"min";
+		result += `${minutes}min`;
 
 	return result;
 }

@@ -29,7 +29,6 @@ export function DogShowComponent() {
     const crossbreed: Breed = dog.crossbreed;
     const owner: Client = dog.client;
 
-    // TODO display diseases list
     return (
         <div className={styles.wrapper}>
             <Paper className={styles.paper}>

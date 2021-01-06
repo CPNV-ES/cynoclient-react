@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, createStyles, Grid, IconButton, InputLabel, MenuItem, Theme} from "@material-ui/core";
+import {createStyles, Grid, IconButton, InputLabel, MenuItem, Theme} from "@material-ui/core";
 import {Autocomplete} from '@material-ui/lab';
 import {Select, TextField} from 'formik-material-ui';
 import {Field, Formik} from 'formik';

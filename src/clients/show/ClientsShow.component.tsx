@@ -1,7 +1,7 @@
 import React from "react";
 import {Redirect, useHistory, useParams} from "react-router-dom";
-import {useClient} from "../../common/hook/Clients.hook";
-import {Button, createStyles, Grid, Paper, Theme} from "@material-ui/core";
+import {useClient, useDeleteClient} from "../../common/hook/Clients.hook";
+import {IconButton, createStyles, Grid, Paper, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {displayClientSex} from "../../common/utils/Client.utils";
 import EditIcon from '@material-ui/icons/Edit';
@@ -12,8 +12,10 @@ export function ClientsShowComponent() {
     const route = useParams<{ clientId: string }>();
     const history = useHistory();
 
-    const {data: client} = useClient(Number(route.clientId));
+    const [deleteClient] = useDeleteClient();
 
+    const {data: client} = useClient(Number(route.clientId));
+    console.log(client);
     if (!client) {
         return <Redirect to={"/clients"}/>
     }
@@ -28,15 +30,10 @@ export function ClientsShowComponent() {
 
                     <Grid container item direction={"row"} justify={"space-between"} xs={12} md={3}>
                         <Grid item xs={6}>
-                            <Button variant={"contained"} color={"primary"}
-                                    startIcon={<EditIcon/>}
-                                    onClick={() => history.push(`/clients/${client?.id}/edit`)}>Modifier</Button>
                         </Grid>
-
                         <Grid item xs={6}>
-                            <Button variant={"contained"} color={"secondary"}
-                                    startIcon={<DeleteIcon/>}
-                                    onClick={() => alert("NOT IMPLEMENTED")}>Supprimer</Button>
+                            <IconButton className={styles.edit} onClick={() => history.push(`/clients/${client?.id}/edit`)} ><EditIcon/></IconButton>
+                            <IconButton className={styles.delete} onClick={async () => { await deleteClient(client) }} ><DeleteIcon/></IconButton>
                         </Grid>
                     </Grid>
 
@@ -70,6 +67,19 @@ const useStyles = makeStyles((theme: Theme) =>
         paper: {
             padding: theme.spacing(2),
         },
+        delete: {
+            backgroundColor: theme.palette.error.main,
+            "&:hover" : {
+                backgroundColor: theme.palette.error.dark,
+            }
+        },
+        edit: {
+            marginRight: 20,
+            backgroundColor: theme.palette.primary.main,
+            "&:hover" : {
+                backgroundColor: theme.palette.primary.dark,
+            }
+        }
     })
 );
 

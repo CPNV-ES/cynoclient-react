@@ -8,10 +8,11 @@ import TableBody from "@material-ui/core/TableBody";
 import {useServices} from "../../common/hook/Services.hook";
 import {Service} from "../../common/resource/Service.resource";
 import {displayServiceDuration} from "../../common/utils/Service.utils";
+import {useHistory} from "react-router-dom";
 
-export function ServiceRow(service: Service) {
+export function ServiceRow(service: Service, onClick: () => void) {
     return (
-        <TableRow hover key={service.id}>
+        <TableRow hover key={service.id} onClick={onClick}>
             <TableCell>{service.moment}</TableCell>
             <TableCell>{displayServiceDuration(service)}</TableCell>
             <TableCell>{service.type}</TableCell>
@@ -23,6 +24,7 @@ export function ServiceRow(service: Service) {
 
 export function ServicesTable() {
     const {data: services} = useServices();
+    const history = useHistory();
 
     return (
         <TableContainer component={Paper}>
@@ -37,7 +39,7 @@ export function ServicesTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {services?.map((service) => ServiceRow(service))}
+                    {services?.map((service) => ServiceRow(service, () => history.push(`/services/${service.id}/show`)))}
                 </TableBody>
             </Table>
         </TableContainer>

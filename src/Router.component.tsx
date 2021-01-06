@@ -10,6 +10,7 @@ import {DiseasesIndexComponent} from "./diseases/index/DiseasesIndex.component"
 import {DiseaseShowComponent} from "./diseases/show/DiseasesShow.component";
 import {ServicesIndexComponent} from "./services/index/ServicesIndex.component";
 import {BreedsShowComponent} from "./breeds/show/BreedsShow.component";
+import {ServiceShowComponent} from "./services/show/ServiceShow.component";
 
 export function RouterComponent() {
     return (
@@ -43,6 +44,9 @@ export function RouterComponent() {
             </Route>
             <Route path="/diseases">
                 <DiseasesIndexComponent/>
+            </Route>
+            <Route path="/services/:serviceId/show">
+                <ServiceShowComponent/>
             </Route>
             <Route path="/services">
                 <ServicesIndexComponent/>

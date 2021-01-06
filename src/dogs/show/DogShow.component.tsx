@@ -12,6 +12,7 @@ import {clientFullName} from "../../common/utils/Client.utils";
 import {Client} from "../../common/resource/Client.resource";
 import {Breed} from "../../common/resource/Breed.resource";
 import {DogDiseaseFormComponent} from "./DogDiseaseForm.component";
+import {DogDiseasesTable} from "./DogDiseasesTable.component";
 
 export function DogShowComponent() {
     const route = useParams<{ dogId: string }>();
@@ -82,6 +83,9 @@ export function DogShowComponent() {
                                     startIcon={<AddIcon/>}
                                     onClick={() => setDisplayDiseaseForm(true)}>Ajouter</Button>
                         </Grid>
+                    </Grid>
+                    <Grid container item direction={"row"} justify={"space-between"} xs={12} md={12}>
+                        <DogDiseasesTable/>
                     </Grid>
                     <Grid container item direction={"row"} justify={"space-between"} xs={12} md={12}>
                         <Grid item xs={9}>

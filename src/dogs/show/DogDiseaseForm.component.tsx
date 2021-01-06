@@ -1,6 +1,6 @@
 import React from "react";
 import {useParams} from "react-router-dom";
-import {useDog} from "../../common/hook/Dogs.hook";
+import {useDog, useEditDog} from "../../common/hook/Dogs.hook";
 import {useDiseases} from "../../common/hook/Diseases.hook";
 import {Field, Formik} from "formik";
 import {makeStyles} from "@material-ui/core/styles";
@@ -12,13 +12,21 @@ import {Disease} from "../../common/resource/Diseases.ressource";
 export function DogDiseaseFormComponent() {
     const route = useParams<{ dogId: string }>();
     const {data: dog} = useDog(Number(route.dogId));
-    const {data: diseases} = useDiseases()
+    const {data: diseases} = useDiseases();
+    const [editDog] = useEditDog();
     const styles = useStyles();
     return (
         <Formik initialValues={{disease: null}}
                 onSubmit={(values) => {
-                    console.log(values);
-                    console.log('not implemented')
+                    if (values.disease != null) {
+                        // @ts-ignore
+                        dog.noun = "Luna2"
+                        // @ts-ignore
+                        dog?.diseases.push(values.disease)
+                        console.log(dog);
+                        // @ts-ignore
+                        return editDog(dog);
+                    }
                 }}>
             {({submitForm, isSubmitting, setFieldValue}) => (
                 <div className={styles.wrapper}>

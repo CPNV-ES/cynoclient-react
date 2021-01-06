@@ -23,6 +23,7 @@ export function useClients() {
 }
 
 export function useClient(id: number) {
+        console.log("ici", id)
     return useQuery<Client | null>([CLIENT_CACHE_KEY, id],
         () => ClientsRepository.getClient(id))
 }
@@ -32,8 +33,8 @@ export function useCreateClient(){
     return useMutation(
         (client: Client) => ClientsRepository.postClient(client),
         {
-            onSuccess: () => {
-                cache.invalidateQueries(CLIENT_CACHE_KEY);
+            onSuccess: async () => {
+                await cache.invalidateQueries(CLIENT_CACHE_KEY);
             },
         }
     )
@@ -43,8 +44,20 @@ export function useEditClient(){
     return useMutation(
         (client: Client) => ClientsRepository.patchClient(client),
         {
-            onSuccess: () => {
-                cache.invalidateQueries(CLIENT_CACHE_KEY);
+            onSuccess: async () => {
+                await cache.invalidateQueries(CLIENT_CACHE_KEY);
+            },
+        }
+    )
+}
+export function useDeleteClient(){
+    const cache = useQueryCache();
+    return useMutation(
+        (client: Client) => ClientsRepository.deleteClient(client),
+        {
+            onSuccess: async (_, client: Client) => {
+                // await cache.removeQueries([CLIENT_CACHE_KEY, client.id])
+                await cache.invalidateQueries(CLIENT_CACHE_KEY,{refetchActive: true, refetchInactive: true});
             },
         }
     )

@@ -11,3 +11,8 @@ export function useServices() {
         () => ServicesRepository.getServices()
     )
 }
+
+export function useService(id: number) {
+    return useQuery<Service | null>([CACHE_KEY, id],
+        () => ServicesRepository.getService(id));
+}

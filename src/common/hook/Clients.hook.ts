@@ -33,7 +33,8 @@ export function useCreateClient(){
         (client: Client) => ClientsRepository.postClient(client),
         {
             onSuccess: () => {
-                cache.invalidateQueries(CLIENT_CACHE_KEY);
+                cache.invalidateQueries(CLIENT_CACHE_KEY, );
+                cache.removeQueries()
             },
         }
     )

@@ -8,6 +8,6 @@ export const BreedsRepository = {
         .then(res => List(res.data)),
 
     getBreed: (id: number): Promise<Breed | null> => Axios
-        .get(`/api/breeds/${id}`)
+        .get(`/api/breeds/${id}?with[]=category`)
         .then(res => res.data)
 }

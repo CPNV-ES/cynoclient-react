@@ -1,5 +1,5 @@
 import {useDiseases} from "../../common/hook/Diseases.hook";
-import {Table, TableCell, TableContainer, TableHead, TableRow, TableBody} from "@material-ui/core";
+import {Table, TableCell, TableContainer, TableHead, TableRow, TableBody, Paper} from "@material-ui/core";
 import React from "react";
 import {Disease} from "../../common/resource/Diseases.ressource";
 import {useHistory} from "react-router-dom";
@@ -17,7 +17,7 @@ export function DiseasesTable() {
     const history = useHistory();
     const {data: diseases} = useDiseases();
     return (
-        <TableContainer>
+        <TableContainer component={Paper}>
             <Table>
                 <TableHead>
                     <TableRow>
@@ -28,7 +28,7 @@ export function DiseasesTable() {
                 <TableBody>
                     {diseases?.map((disease) => DiseaseRow(
                         disease,
-                        () => history.push(`/diseases/${disease.id}`))
+                        () => history.push(`/diseases/${disease.id}/show`))
                     )}
                 </TableBody>
             </Table>

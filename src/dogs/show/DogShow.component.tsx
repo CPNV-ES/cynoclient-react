@@ -41,13 +41,13 @@ export function DogShowComponent() {
                         <Grid item xs={6}>
                             <Button variant={"contained"} color={"primary"}
                                     startIcon={<EditIcon/>}
-                                    onClick={() => history.push(`/dogs/${dog?.id}/edit`)}>Modifier</Button>
+                                    onClick={() => history.push(`/dogs/${dog?.id}/edit`)}/>
                         </Grid>
 
                         <Grid item xs={6}>
                             <Button variant={"contained"} color={"secondary"}
                                     startIcon={<DeleteIcon/>}
-                                    onClick={() => alert("NOT IMPLEMENTED")}>Supprimer</Button>
+                                    onClick={() => alert("NOT IMPLEMENTED")}/>
                         </Grid>
                     </Grid>
                     <Grid item xs={12} md={12}>
@@ -81,7 +81,7 @@ export function DogShowComponent() {
                         <Grid item justify={"flex-end"} xs={3}>
                             <Button variant={"contained"} color={"primary"}
                                     startIcon={<AddIcon/>}
-                                    onClick={() => setDisplayDiseaseForm(true)}>Ajouter</Button>
+                                    onClick={() => setDisplayDiseaseForm(true)}/>
                         </Grid>
                     </Grid>
                     <Grid container item direction={"row"} justify={"space-between"} xs={12} md={12}>
@@ -95,7 +95,7 @@ export function DogShowComponent() {
                         <Grid item justify={"flex-end"} xs={3}>
                             <Button variant={"contained"} color={"primary"}
                                     startIcon={<AddIcon/>}
-                                    onClick={() => alert("NOT IMPLEMENTED")}>Ajouter</Button>
+                                    onClick={() => alert("NOT IMPLEMENTED")}/>
                         </Grid>
                         <Grid item xs={12}>
                             <DogServicesTable/>

@@ -20,8 +20,6 @@ export function DogDiseaseFormComponent() {
                 onSubmit={(values) => {
                     if (values.disease != null) {
                         // @ts-ignore
-                        dog.noun = "Luna2"
-                        // @ts-ignore
                         dog?.diseases.push(values.disease)
                         console.log(dog);
                         // @ts-ignore

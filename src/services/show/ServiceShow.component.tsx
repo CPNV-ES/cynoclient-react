@@ -4,14 +4,16 @@ import React from "react";
 import {Button, Grid, Paper} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import {useService} from "../../common/hook/Services.hook";
+import {useDeleteService, useService} from "../../common/hook/Services.hook";
 import {displayServiceDuration} from "../../common/utils/Service.utils";
+import IconButton from "@material-ui/core/IconButton";
 
 export function ServiceShowComponent() {
     const route = useParams<{ serviceId: string }>();
     const {data: service} = useService(Number(route.serviceId));
     const styles = useStyles();
     const history = useHistory();
+    const [deleteService] = useDeleteService();
 
     if (!service) {
         return <Redirect to={"/services"}/>
@@ -26,15 +28,10 @@ export function ServiceShowComponent() {
                     </Grid>
                     <Grid container item direction={"row"} justify={"space-between"} xs={12} md={3}>
                         <Grid item xs={6}>
-                            <Button variant={"contained"} color={"primary"}
-                                    startIcon={<EditIcon/>}
-                                    onClick={() => history.push(`/services/${service?.id}/edit`)}>Modifier</Button>
+                            <IconButton className={styles.edit} onClick={() => history.push(`/services/${service?.id}/edit`)} ><EditIcon/></IconButton>
                         </Grid>
-
                         <Grid item xs={6}>
-                            <Button variant={"contained"} color={"secondary"}
-                                    startIcon={<DeleteIcon/>}
-                                    onClick={() => alert("NOT IMPLEMENTED")}>Supprimer</Button>
+                            <IconButton className={styles.delete} onClick={async () => {await deleteService(service) }} ><DeleteIcon/></IconButton>
                         </Grid>
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -57,6 +54,19 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         paper: {
             padding: theme.spacing(2),
+        },
+        delete: {
+            backgroundColor: theme.palette.error.main,
+            "&:hover" : {
+                backgroundColor: theme.palette.error.dark,
+            }
+        },
+        edit: {
+            marginRight: 20,
+            backgroundColor: theme.palette.primary.main,
+            "&:hover" : {
+                backgroundColor: theme.palette.primary.dark,
+            }
         },
     })
 );

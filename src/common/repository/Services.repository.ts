@@ -9,4 +9,6 @@ export const ServicesRepository = {
     getService: (id: number): Promise<Service | null> => Axios
         .get<Service | null>(`/api/services/${id}`)
         .then(res => res.data),
+    deleteService: (service: Service) => Axios
+        .delete(`/api/services/${service.id}`),
 }

@@ -1,26 +1,11 @@
 import {useBreeds} from "../../common/hook/Breeds.hook";
 import React, {useMemo, useState} from "react";
-import {
-    Card,
-    CardActionArea,
-    CardContent,
-    CardMedia,
-    FormControl,
-    Grid,
-    InputLabel,
-    MenuItem,
-    Select,
-    Theme,
-    Typography,
-    useTheme
-} from "@material-ui/core";
+import {FormControl, Grid, InputLabel, MenuItem, Select, Typography} from "@material-ui/core";
 import {Breed} from "../../common/resource/Breed.resource";
-import {makeStyles} from "@material-ui/core/styles";
-import {Map} from "immutable";
+import {List, Map} from "immutable";
+import {BreedsMasonry} from "./BreedsMasonry.component";
 
 export function BreedsIndexComponent() {
-    const theme = useTheme();
-    const styles = useStyles();
     const {data: breeds} = useBreeds();
     const [filteredCategory, setFilteredCategory] = useState<number>(-1);
 
@@ -29,7 +14,7 @@ export function BreedsIndexComponent() {
 
         if (breeds) {
             breeds.forEach((breed) => {
-                if(breed.category)
+                if (breed.category)
                     result = result.set(breed.category.id, breed.category.noun)
             })
         }
@@ -37,31 +22,23 @@ export function BreedsIndexComponent() {
         return result.sort();
     }, [breeds]);
 
-    const renderItem = (breed: Breed) => (
-        <Grid key={breed.id} item xs={12} sm={6} md={3}>
-            <Card className={styles.cardWrapper}>
-                <CardActionArea>
-                    {
-                        breed.picture ? (
-                            <CardMedia
-                                className={styles.cardMedia}
-                                image={breed.picture}
-                            />
-                        ) : (
-                            <div className={styles.cardMedia} style={{backgroundColor: theme.palette.grey["100"]}}>
-                            </div>
-                        )
-                    }
+    const filteredBreeds: List<Breed> = useMemo(() => {
+        if (!breeds) {
+            return List();
+        }
 
-                    <CardContent>
-                        <Typography gutterBottom variant="h6">
-                            {breed.noun}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
-        </Grid>
-    )
+        return breeds.filter((breed: Breed) => {
+            if (filteredCategory === -1) {
+                return true
+            }
+
+            if (!breed.category) {
+                return false
+            }
+
+            return filteredCategory === breed.category.id
+        })
+    }, [breeds, filteredCategory])
 
     return (
         <div>
@@ -91,29 +68,9 @@ export function BreedsIndexComponent() {
             </Grid>
 
             <Grid container>
-                {breeds?.filter((breed: Breed) => {
-                    if (filteredCategory === -1) {
-                        return true
-                    }
-
-                    if (!breed.category) {
-                        return false
-                    }
-
-                    return filteredCategory === breed.category.id
-                }).map(renderItem)}
+                <BreedsMasonry breeds={filteredBreeds}/>
             </Grid>
         </div>
     )
 }
 
-const useStyles = makeStyles((theme: Theme) => {
-    return {
-        cardWrapper: {
-            margin: theme.spacing(2),
-        },
-        cardMedia: {
-            height: 200,
-        },
-    }
-});

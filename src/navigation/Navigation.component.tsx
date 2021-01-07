@@ -20,15 +20,18 @@ import PetsIcon from '@material-ui/icons/Pets';
 import AdbIcon from '@material-ui/icons/Adb';
 import MenuIcon from '@material-ui/icons/Menu';
 import HealingIcon from '@material-ui/icons/Healing';
+import RoomServiceIcon from '@material-ui/icons/RoomService';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import clsx from 'clsx';
+import {useDrawerTransitionChangeValue} from "../common/hook/Navigation.hook";
 
 const drawerWidth = 240;
 
 export function NavigationComponent(props: PropsWithChildren<any>) {
-    const classes = useStyles();
     const history = useHistory();
+    const classes = useStyles();
 
+    const [drawerTransitionValue, setDrawerTransitionValue] = useDrawerTransitionChangeValue();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const navigationItem = (label: string, path: string, icon: JSX.Element) => (
@@ -58,6 +61,7 @@ export function NavigationComponent(props: PropsWithChildren<any>) {
                 </Toolbar>
             </AppBar>
             <Drawer
+                id={'drawer'}
                 className={classes.drawer}
                 variant="persistent"
                 anchor="left"
@@ -65,6 +69,7 @@ export function NavigationComponent(props: PropsWithChildren<any>) {
                 classes={{
                     paper: classes.drawerPaper,
                 }}
+                onTransitionEnd={() => setDrawerTransitionValue(!drawerTransitionValue)}
             >
                 <div className={classes.drawerHeader}>
                     <IconButton onClick={() => setIsDrawerOpen(false)}>
@@ -77,6 +82,7 @@ export function NavigationComponent(props: PropsWithChildren<any>) {
                     {navigationItem("Races", "/breeds", <AdbIcon/>)}
                     {navigationItem("Chiens", "/dogs", <PetsIcon/>)}
                     {navigationItem("Maladies", "/diseases", <HealingIcon/>)}
+                    {navigationItem("Services", "/services", <RoomServiceIcon/>)}
                 </List>
             </Drawer>
             <main className={clsx(classes.content, {

@@ -6,19 +6,20 @@ import {displayDogSex, dogAge} from "../../common/utils/Dog.utils";
 import {displayBool} from "../../common/utils/Data.utils";
 import {useHistory} from "react-router-dom";
 import {clientFullName} from "../../common/utils/Client.utils";
-import {useBreed} from "../../common/hook/Breeds.hook";
 import {Client} from "../../common/resource/Client.resource";
+import {Breed} from "../../common/resource/Breed.resource";
+import Paper from "@material-ui/core/Paper";
 
 export function DogRow(dog: Dog, onClick: () => void) {
     const history = useHistory();
-    const {data: breed} = useBreed(dog.breed);
-    const {data: crossbreed} = useBreed(dog.crossbreed);
+    const breed: Breed = dog.breed;
+    const crossbreed: Breed = dog.crossbreed;
     const owner: Client = dog.client;
 
     // Infer event type from its usage
     const onClientClick = (event: { stopPropagation: () => void; }) => {
         event.stopPropagation();
-        history.push(`clients/${dog.client.id}/show`);
+        history.push(`clients/${owner.id}/show`);
     }
 
     return (
@@ -40,7 +41,7 @@ export function DogsTable() {
     const history = useHistory();
     const {data: dogs} = useDogs();
     return (
-        <TableContainer>
+        <TableContainer component={Paper}>
             <Table>
                 <TableHead>
                     <TableRow>

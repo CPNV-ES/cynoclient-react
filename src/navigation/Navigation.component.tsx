@@ -76,7 +76,7 @@ export function NavigationComponent(props: PropsWithChildren<any>) {
                     {navigationItem("Clients", "/clients", <GroupIcon/>)}
                     {navigationItem("Races", "/breeds", <AdbIcon/>)}
                     {navigationItem("Chiens", "/dogs", <PetsIcon/>)}
-                    {navigationItem("Diseases", "/diseases", <HealingIcon/>)}
+                    {navigationItem("Maladies", "/diseases", <HealingIcon/>)}
                 </List>
             </Drawer>
             <main className={clsx(classes.content, {

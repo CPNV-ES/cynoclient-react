@@ -2,7 +2,6 @@ import {useDisease} from "../../common/hook/Diseases.hook";
 import {createStyles, Paper, Grid, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import React from "react";
-import {Disease} from "../../common/resource/Diseases.ressource";
 import {displayBool} from "../../common/utils/Data.utils";
 import {useHistory, useParams, Redirect} from "react-router-dom";
 
@@ -69,6 +68,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         row: {
             padding: theme.spacing(1),
+            whiteSpace: "pre-wrap"
         }
     })
 );

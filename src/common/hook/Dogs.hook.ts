@@ -2,8 +2,6 @@ import {useMutation, useQuery, useQueryCache} from "react-query";
 import {List} from "immutable";
 import {Dog} from "../resource/Dog.resource";
 import {DogsRepository} from "../repository/Dogs.repository";
-import {Client} from "../resource/Client.resource";
-import {ClientsRepository} from "../repository/Clients.repository";
 
 const DOG_CACHE_KEY = "dogs"
 

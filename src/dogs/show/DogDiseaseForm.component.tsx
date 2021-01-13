@@ -13,16 +13,14 @@ export function DogDiseaseFormComponent() {
     const route = useParams<{ dogId: string }>();
     const {data: dog} = useDog(Number(route.dogId));
     const {data: diseases} = useDiseases();
-    const [editDog] = useEditDog();
     const styles = useStyles();
+    const {mutateAsync: editDog} = useEditDog()
+
     return (
         <Formik initialValues={{disease: null}}
-                onSubmit={(values) => {
-                    if (values.disease != null) {
-                        // @ts-ignore
-                        dog?.diseases.push(values.disease)
-                        console.log(dog);
-                        // @ts-ignore
+                onSubmit={(values: { disease: Disease | null }) => {
+                    if (values.disease != null && dog) {
+                        dog.diseases.push(values.disease)
                         return editDog(dog);
                     }
                 }}>
@@ -31,10 +29,10 @@ export function DogDiseaseFormComponent() {
                     <form>
                         <Grid item xs={9} md={9} className={styles.fieldRow}>
                             <Autocomplete
-                                options={diseases?.toJS() || [{noun: ""}] }
+                                options={diseases?.toJS() || [{noun: ""}]}
                                 getOptionLabel={disease => `${disease.noun}`}
                                 getOptionSelected={disease => disease}
-                                defaultValue={ null }
+                                defaultValue={null}
                                 renderInput={params => (
                                     <Field component={TextField} {...params} name="disease_temp" label="maladie"/>
                                 )}

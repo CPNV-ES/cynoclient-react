@@ -1,4 +1,4 @@
-import {useQuery, useQueryClient, useMutation} from "react-query";
+import {useMutation, useQuery, useQueryClient} from "react-query";
 import {List} from "immutable";
 import {Dog} from "../resource/Dog.resource";
 import {DogsRepository} from "../repository/Dogs.repository";

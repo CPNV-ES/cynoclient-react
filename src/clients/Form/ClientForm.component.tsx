@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import "yup-phone";
 import {makeStyles} from "@material-ui/core/styles";
 import {useHistory, useParams} from "react-router-dom";
-import {useClient, useEditClient, useCreateClient} from "../../common/hook/Clients.hook";
+import {useClient, useCreateClient, useEditClient} from "../../common/hook/Clients.hook";
 import {useLocalities} from "../../common/hook/Locality.hook";
 import {Locality} from "../../common/resource/Locality.resource";
 import {Client} from "../../common/resource/Client.resource";
@@ -19,8 +19,8 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
     const route = useParams<{ clientId?: string }>();
     const styles = useStyles();
     const {data: client} = useClient(Number(route.clientId || -1))
-    const [editClient] = useEditClient();
-    const [createClient] = useCreateClient();
+    const {mutateAsync: editClient} = useEditClient();
+    const {mutateAsync: createClient} = useCreateClient();
     const {data: localities} = useLocalities();
     const defaultLocation = {zip: client?.locality?.zip || "", noun: client?.locality?.noun || ""};
 

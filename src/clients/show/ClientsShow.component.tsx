@@ -1,7 +1,7 @@
 import React from "react";
 import {Redirect, useHistory, useParams} from "react-router-dom";
 import {useClient, useDeleteClient} from "../../common/hook/Clients.hook";
-import {IconButton, createStyles, Grid, Paper, Theme} from "@material-ui/core";
+import {createStyles, Grid, IconButton, Paper, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {displayClientSex} from "../../common/utils/Client.utils";
 import EditIcon from '@material-ui/icons/Edit';
@@ -12,10 +12,10 @@ export function ClientsShowComponent() {
     const route = useParams<{ clientId: string }>();
     const history = useHistory();
 
-    const [deleteClient] = useDeleteClient();
+    const {mutateAsync: deleteClient} = useDeleteClient();
 
     const {data: client} = useClient(Number(route.clientId));
-    console.log(client);
+
     if (!client) {
         return <Redirect to={"/clients"}/>
     }

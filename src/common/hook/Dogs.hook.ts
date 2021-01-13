@@ -1,4 +1,4 @@
-import {useQuery, useQueryCache} from "react-query";
+import {useMutation, useQuery, useQueryCache} from "react-query";
 import {List} from "immutable";
 import {Dog} from "../resource/Dog.resource";
 import {DogsRepository} from "../repository/Dogs.repository";
@@ -21,4 +21,16 @@ export function useDogs() {
 export function useDog(id: number) {
     return useQuery<Dog | null>([DOG_CACHE_KEY, id],
         () => DogsRepository.getDog(id))
+}
+
+export function useEditDog(){
+    const cache = useQueryCache();
+    return useMutation(
+        (dog: Dog) => DogsRepository.patchDog(dog),
+        {
+            onSuccess: () => {
+                cache.invalidateQueries(DOG_CACHE_KEY);
+            },
+        }
+    )
 }

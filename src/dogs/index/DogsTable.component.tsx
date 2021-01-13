@@ -2,13 +2,15 @@ import {useDogs} from "../../common/hook/Dogs.hook";
 import {Table, TableCell, TableContainer, TableHead, TableRow, TableBody} from "@material-ui/core";
 import React from "react";
 import {Dog} from "../../common/resource/Dog.resource";
-import {displayDogSex, dogAge} from "../../common/utils/Dog.utils";
+import {dogAge} from "../../common/utils/Dog.utils";
 import {displayBool} from "../../common/utils/Data.utils";
 import {useHistory} from "react-router-dom";
 import {clientFullName} from "../../common/utils/Client.utils";
 import {Client} from "../../common/resource/Client.resource";
 import {Breed} from "../../common/resource/Breed.resource";
 import Paper from "@material-ui/core/Paper";
+import {BiMaleSign, BiFemaleSign} from 'react-icons/bi';
+import {CgCross} from "react-icons/all";
 
 export function DogRow(dog: Dog, onClick: () => void) {
     const history = useHistory();
@@ -25,8 +27,12 @@ export function DogRow(dog: Dog, onClick: () => void) {
     return (
         <TableRow hover key={dog.id} onClick={onClick}>
             <TableCell>{dog.noun}</TableCell>
-            <TableCell>{displayDogSex(dog)}</TableCell>
-            <TableCell>{displayBool(dog.isDead)}</TableCell>
+            <TableCell>
+                {dog.isFemale ? <BiMaleSign/> : <BiFemaleSign/>}
+            </TableCell>
+            <TableCell>
+                {dog.isDead ? <CgCross/> : null}
+            </TableCell>
             <TableCell>{dogAge(dog)}</TableCell>
             <TableCell>{breed?.noun}</TableCell>
             <TableCell>{crossbreed?.noun}</TableCell>

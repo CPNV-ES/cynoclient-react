@@ -1,12 +1,12 @@
 import React, {PropsWithChildren} from "react";
-import {ReactQueryDevtools} from "react-query-devtools";
 import {BrowserRouter} from "react-router-dom"
-import {QueryCache, ReactQueryCacheProvider} from "react-query";
+import {QueryClient, QueryClientProvider} from "react-query";
+import {ReactQueryDevtools} from "react-query/devtools";
 import {createMuiTheme, CssBaseline, ThemeProvider} from "@material-ui/core";
 import {RecoilRoot} from "recoil";
 
-const queryCache = new QueryCache({
-    defaultConfig: {
+const queryClient = new QueryClient({
+    defaultOptions: {
         queries: {
             suspense: true
         }
@@ -25,11 +25,11 @@ export function ProviderComponent(props: PropsWithChildren<any>) {
         <ThemeProvider theme={theme}>
             <RecoilRoot>
                 <BrowserRouter>
-                    <ReactQueryCacheProvider queryCache={queryCache}>
+                    <QueryClientProvider client={queryClient}>
                         <CssBaseline/>
                         {props.children}
                         <ReactQueryDevtools initialIsOpen/>
-                    </ReactQueryCacheProvider>
+                    </QueryClientProvider>
                 </BrowserRouter>
             </RecoilRoot>
         </ThemeProvider>

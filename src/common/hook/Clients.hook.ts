@@ -1,12 +1,12 @@
 import {ClientsRepository} from "../repository/Clients.repository";
-import {useMutation, useQuery, useQueryCache} from "react-query";
+import {useMutation, useQuery, useQueryClient} from "react-query";
 import {Client} from "../resource/Client.resource";
 import {List} from "immutable";
 
 const CLIENT_CACHE_KEY = "clients"
 
 export function useClients() {
-    const cache = useQueryCache();
+    const queryClient = useQueryClient();
 
     return useQuery<List<Client>>(
         CLIENT_CACHE_KEY,
@@ -15,7 +15,7 @@ export function useClients() {
             onSuccess: (clients => {
                 //Also add each client in the cache by their id to avoid refetching them when using useClient
                 clients.forEach(client => {
-                    cache.setQueryData([CLIENT_CACHE_KEY, client.id], client)
+                    queryClient.setQueryData([CLIENT_CACHE_KEY, client.id], client)
                 })
             })
         }
@@ -27,25 +27,37 @@ export function useClient(id: number) {
         () => ClientsRepository.getClient(id))
 }
 
-export function useCreateClient(){
-    const cache = useQueryCache();
+export function useCreateClient() {
+    const queryClient = useQueryClient();
     return useMutation(
         (client: Client) => ClientsRepository.postClient(client),
         {
-            onSuccess: () => {
-                cache.invalidateQueries(CLIENT_CACHE_KEY, );
-                cache.removeQueries()
+            onSuccess: async () => {
+                await queryClient.invalidateQueries(CLIENT_CACHE_KEY);
             },
         }
     )
 }
-export function useEditClient(){
-    const cache = useQueryCache();
+
+export function useEditClient() {
+    const queryClient = useQueryClient();
     return useMutation(
         (client: Client) => ClientsRepository.patchClient(client),
         {
-            onSuccess: () => {
-                cache.invalidateQueries(CLIENT_CACHE_KEY);
+            onSuccess: async () => {
+                await queryClient.invalidateQueries(CLIENT_CACHE_KEY);
+            },
+        }
+    )
+}
+
+export function useDeleteClient() {
+    const queryClient = useQueryClient();
+    return useMutation(
+        (client: Client) => ClientsRepository.deleteClient(client),
+        {
+            onSuccess: async (_, client: Client) => {
+                await queryClient.invalidateQueries(CLIENT_CACHE_KEY);
             },
         }
     )

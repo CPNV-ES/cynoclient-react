@@ -19,6 +19,7 @@ import {useHistory} from 'react-router-dom';
 import PetsIcon from '@material-ui/icons/Pets';
 import AdbIcon from '@material-ui/icons/Adb';
 import MenuIcon from '@material-ui/icons/Menu';
+import HealingIcon from '@material-ui/icons/Healing';
 import RoomServiceIcon from '@material-ui/icons/RoomService';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import clsx from 'clsx';
@@ -27,8 +28,8 @@ import {useDrawerTransitionChangeValue} from "../common/hook/Navigation.hook";
 const drawerWidth = 240;
 
 export function NavigationComponent(props: PropsWithChildren<any>) {
-    const classes = useStyles();
     const history = useHistory();
+    const classes = useStyles();
 
     const [drawerTransitionValue, setDrawerTransitionValue] = useDrawerTransitionChangeValue();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -80,6 +81,7 @@ export function NavigationComponent(props: PropsWithChildren<any>) {
                     {navigationItem("Clients", "/clients", <GroupIcon/>)}
                     {navigationItem("Races", "/breeds", <AdbIcon/>)}
                     {navigationItem("Chiens", "/dogs", <PetsIcon/>)}
+                    {navigationItem("Maladies", "/diseases", <HealingIcon/>)}
                     {navigationItem("Services", "/services", <RoomServiceIcon/>)}
                 </List>
             </Drawer>

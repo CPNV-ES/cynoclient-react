@@ -1,24 +1,26 @@
 import React from 'react';
-import {Button, createStyles, Grid, InputLabel, MenuItem, Theme} from "@material-ui/core";
+import {createStyles, Grid, IconButton, InputLabel, MenuItem, Theme} from "@material-ui/core";
 import {Autocomplete} from '@material-ui/lab';
 import {Select, TextField} from 'formik-material-ui';
 import {Field, Formik} from 'formik';
 import * as Yup from 'yup';
 import "yup-phone";
 import {makeStyles} from "@material-ui/core/styles";
-import {useParams} from "react-router-dom";
-import {useClient, useEditClient, useCreateClient} from "../../common/hook/Clients.hook";
+import {useHistory, useParams} from "react-router-dom";
+import {useClient, useCreateClient, useEditClient} from "../../common/hook/Clients.hook";
 import {useLocalities} from "../../common/hook/Locality.hook";
 import {Locality} from "../../common/resource/Locality.resource";
 import {Client} from "../../common/resource/Client.resource";
+import SendIcon from '@material-ui/icons/Send';
 
 export function ClientFormComponent(props: { isEditing: boolean }) {
 
+    const history = useHistory();
     const route = useParams<{ clientId?: string }>();
     const styles = useStyles();
     const {data: client} = useClient(Number(route.clientId || -1))
-    const [editClient] = useEditClient();
-    const [createClient] = useCreateClient();
+    const {mutateAsync: editClient} = useEditClient();
+    const {mutateAsync: createClient} = useCreateClient();
     const {data: localities} = useLocalities();
     const defaultLocation = {zip: client?.locality?.zip || "", noun: client?.locality?.noun || ""};
 
@@ -68,7 +70,8 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                     street: values.street,
                     locality: values.locality,
                 }
-                return props.isEditing ? editClient(customClient) : createClient(customClient)
+                props.isEditing ? editClient(customClient) : createClient(customClient)
+                history.push(`/`)
             }}
         >
             {({submitForm, isSubmitting,setFieldValue}) => (
@@ -140,14 +143,13 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                                     label="Numéro et nom de rue"
                                 />
                             </Grid>
-                            <Grid item xs={12} className={styles.fieldRow}>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
+                            <Grid item xs={12}>
+                                <IconButton
+                                    className={styles.send}
                                     disabled={isSubmitting}
                                     onClick={submitForm}>
-                                    Submit
-                                </Button>
+                                    <SendIcon/>
+                                </IconButton>
                             </Grid>
                         </Grid>
                     </form>
@@ -165,6 +167,12 @@ const useStyles = makeStyles((theme: Theme) =>
         wrapper: {
             padding: theme.spacing(2),
             minWidth: 300,
+        },
+        send: {
+            backgroundColor: theme.palette.primary.main,
+            "&:hover" : {
+                backgroundColor: theme.palette.primary.dark,
+            }
         }
     })
 );

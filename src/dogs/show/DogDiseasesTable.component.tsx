@@ -1,4 +1,4 @@
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
+import {Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core";
 import React from "react";
 import {Disease} from "../../common/resource/Diseases.ressource";
 import {useParams} from "react-router-dom";

@@ -3,7 +3,6 @@ import {Table, TableCell, TableContainer, TableHead, TableRow, TableBody} from "
 import React from "react";
 import {Dog} from "../../common/resource/Dog.resource";
 import {dogAge} from "../../common/utils/Dog.utils";
-import {displayBool} from "../../common/utils/Data.utils";
 import {useHistory} from "react-router-dom";
 import {clientFullName} from "../../common/utils/Client.utils";
 import {Client} from "../../common/resource/Client.resource";

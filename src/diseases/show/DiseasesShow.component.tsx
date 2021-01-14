@@ -23,34 +23,30 @@ export function DiseaseShowComponent() {
                     <Grid item xs={12} >
                         <b>{disease.noun}</b>
                     </Grid>
-                    <Grid container item direction={"row"} justify={"space-between"} xs={12} className={styles.row}>
-                        <Grid item xs={1}>Description :</Grid>
-                        <Grid item xs>{disease.description}</Grid>
+                    <Grid container item xs={12} className={styles.row}>
+                        <Grid item xs={1}><b>Vacinable ? :</b> </Grid>
+                        <Grid item>{displayBool(disease.isVaccinable)}</Grid>
                     </Grid>
-                    <Grid container item direction={"row"} justify={"space-between"} xs={12} className={styles.row}>
-                        <Grid item xs={1}>Symptômes :</Grid>
-                        <Grid item xs>{disease.symptoms}</Grid>
+                    <Grid container item xs={12} className={styles.row}>
+                        <Grid item xs={1}><b>Transmissible ? :</b> </Grid>
+                        <Grid item>{displayBool(disease.isZoonosis)}</Grid>
                     </Grid>
-                    <Grid container item direction={"row"} justify={"space-between"} xs={12} className={styles.row}>
-                        <Grid item xs={1}>Prévention :</Grid>
-                        <Grid item xs>{disease.preventive}</Grid>
+                    <Grid container item alignContent="flex-start" xs={6} className={styles.row}>
+                        <Grid item xs={12}><b>Description :</b> </Grid>
+                        <Grid item>{disease.description}</Grid>
                     </Grid>
-                    <Grid container item direction={"row"} justify={"space-between"} xs={12} className={styles.row}>
-                        <Grid item xs={1}>Soins :</Grid>
-                        <Grid item xs>{disease.curative}</Grid>
+                    <Grid container item alignContent="flex-start" xs={6} className={styles.row}>
+                        <Grid item xs={12}><b>Symptômes :</b> </Grid>
+                        <Grid item>{disease.symptoms}</Grid>
                     </Grid>
-                    <Grid container item direction={"row"} justify={"space-between"} xs={12} className={styles.row}>
-                        <Grid item xs={1}>Soins :</Grid>
-                        <Grid item xs>{disease.curative}</Grid>
+                    <Grid container item alignContent="flex-start" xs={6} className={styles.row}>
+                        <Grid item xs={12}><b>Prévention :</b> </Grid>
+                        <Grid item>{disease.preventive}</Grid>
                     </Grid>
-                    <Grid container item direction={"row"} justify={"space-between"} xs={12} className={styles.row}>
-                        <Grid item xs={1}>Vacinable ? :</Grid>
-                        <Grid item xs>{displayBool(disease.isVaccinable)}</Grid>
-                    </Grid>
-                    <Grid container item direction={"row"} justify={"space-between"} xs={12} className={styles.row}>
-                        <Grid item xs={1}>Transmissible ? :</Grid>
-                        <Grid item xs>{displayBool(disease.isZoonosis)}</Grid>
-                    </Grid>
+                    <Grid container item alignContent="flex-start" xs={6} className={styles.row}>
+                        <Grid item xs={12}><b>Soins :</b> </Grid>
+                        <Grid item>{disease.curative}</Grid>
+                    </Grid> 
                 </Grid>
             </Paper>
         </div>
@@ -68,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         row: {
             padding: theme.spacing(1),
-            whiteSpace: "pre-wrap"
+            whiteSpace: "pre-wrap",
         }
     })
 );

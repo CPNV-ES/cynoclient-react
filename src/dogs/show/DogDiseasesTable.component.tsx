@@ -1,12 +1,18 @@
 import {Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core";
 import React from "react";
 import {Disease} from "../../common/resource/Diseases.ressource";
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {useDog} from "../../common/hook/Dogs.hook";
 
 function DogDiseaseRow(disease: Disease) {
+    const history = useHistory();
+
+    const onDiseaseClick = () => {
+        history.push(`/diseases/${disease.id}/show`);
+    }
+
     return (
-        <TableRow hover key={disease.id}>
+        <TableRow hover key={disease.id} onClick={onDiseaseClick}>
             <TableCell>{disease.noun}</TableCell>
         </TableRow>
     );

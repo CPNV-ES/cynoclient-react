@@ -4,6 +4,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import React from "react";
 import {displayBool} from "../../common/utils/Data.utils";
 import {useHistory, useParams, Redirect} from "react-router-dom";
+import { BorderRight } from "@material-ui/icons";
 
 export function DiseaseShowComponent() {
     const styles = useStyles();
@@ -24,28 +25,31 @@ export function DiseaseShowComponent() {
                         <b>{disease.noun}</b>
                     </Grid>
                     <Grid container item xs={12} className={styles.row}>
-                        <Grid item xs={1}><b>Vacinable ? :</b> </Grid>
+                        <Grid item xs={1} style={{minWidth: 115}}><b>Vacinable ? :</b> </Grid>
                         <Grid item>{displayBool(disease.isVaccinable)}</Grid>
                     </Grid>
                     <Grid container item xs={12} className={styles.row}>
-                        <Grid item xs={1}><b>Transmissible ? :</b> </Grid>
+                        <Grid item xs={1} style={{minWidth: 115}}><b>Transmissible ? :</b> </Grid>
                         <Grid item>{displayBool(disease.isZoonosis)}</Grid>
                     </Grid>
-                    <Grid container item alignContent="flex-start" xs={6} className={styles.row}>
+                    <Grid container item alignContent="flex-start" xs={6} className={styles.description}>
                         <Grid item xs={12}><b>Description :</b> </Grid>
                         <Grid item>{disease.description}</Grid>
                     </Grid>
-                    <Grid container item alignContent="flex-start" xs={6} className={styles.row}>
+                    <Grid container item alignContent="flex-start" xs={6} className={styles.symptoms}>
                         <Grid item xs={12}><b>Symptômes :</b> </Grid>
                         <Grid item>{disease.symptoms}</Grid>
                     </Grid>
-                    <Grid container item alignContent="flex-start" xs={6} className={styles.row}>
+                    <Grid container item alignContent="flex-start" xs={6} className={styles.preventive}>
                         <Grid item xs={12}><b>Prévention :</b> </Grid>
                         <Grid item>{disease.preventive}</Grid>
                     </Grid>
-                    <Grid container item alignContent="flex-start" xs={6} className={styles.row}>
+                    <Grid container item alignContent="flex-start" xs={6} className={styles.curative}>
                         <Grid item xs={12}><b>Soins :</b> </Grid>
                         <Grid item>{disease.curative}</Grid>
+                    </Grid>
+                    <Grid container item alignContent="flex-start" xs={12} className={styles.dogs}>
+                        
                     </Grid> 
                 </Grid>
             </Paper>
@@ -64,7 +68,35 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         row: {
             padding: theme.spacing(1),
-            whiteSpace: "pre-wrap",
+            whiteSpace: "pre-wrap", 
+        },
+        description: {
+            padding: theme.spacing(1),
+            whiteSpace: "pre-wrap", 
+            borderRight: "1px solid rgba(81, 81, 81, 1)", 
+            borderBottom: "1px solid rgba(81, 81, 81, 1)" 
+        },
+        symptoms: {
+            padding: theme.spacing(1),
+            whiteSpace: "pre-wrap", 
+            borderLeft: "1px solid rgba(81, 81, 81, 1)", 
+            borderBottom: "1px solid rgba(81, 81, 81, 1)" 
+        },
+        preventive: {
+            padding: theme.spacing(1),
+            whiteSpace: "pre-wrap",  
+            borderRight: "1px solid rgba(81, 81, 81, 1)", 
+            borderTop: "1px solid rgba(81, 81, 81, 1)", 
+        },
+        curative: {
+            padding: theme.spacing(1),
+            whiteSpace: "pre-wrap",  
+            borderTop: "1px solid rgba(81, 81, 81, 1)", 
+            borderLeft: "1px solid rgba(81, 81, 81, 1)", 
+        },
+        dogs: {
+            borderTop: "5px solid rgba(81, 81, 81, 1)", 
+
         }
     })
 );

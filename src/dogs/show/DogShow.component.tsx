@@ -13,6 +13,8 @@ import {Client} from "../../common/resource/Client.resource";
 import {Breed} from "../../common/resource/Breed.resource";
 import {DogDiseaseFormComponent} from "./DogDiseaseForm.component";
 import {DogDiseasesTable} from "./DogDiseasesTable.component";
+import {AiOutlineArrowRight} from "react-icons/all";
+import {IconContext} from "react-icons";
 
 export function DogShowComponent() {
     const route = useParams<{ dogId: string }>();
@@ -65,9 +67,14 @@ export function DogShowComponent() {
                         <p>Croisement : {crossbreed?.noun}</p>
                     </Grid>
                     <Grid item xs={12} md={12}>
-                        <p>Propriétaire
-                            : <Link to={`/clients/${owner.id}/show`}>
-                                {clientFullName(owner)}
+                        <p>
+                            Propriétaire : {clientFullName(owner)}&nbsp;
+                            <Link to={`/clients/${owner.id}/show`}>
+                                <IconContext.Provider
+                                    value={{color: 'white', size: '1.2em'}}
+                                >
+                                    <AiOutlineArrowRight/>
+                                </IconContext.Provider>
                             </Link>
                         </p>
                     </Grid>
@@ -91,10 +98,10 @@ export function DogShowComponent() {
                             <h2>Services</h2>
                         </Grid>
 
-                        <Grid item xs={3}>
-                            <Button variant={"contained"} color={"primary"}
-                                    startIcon={<AddIcon/>}
-                                    onClick={() => alert("NOT IMPLEMENTED")}/>
+                        <Grid item justify={"flex-end"} xs={3}>
+                            {/*
+                                Button to add service goes here
+                            */}
                         </Grid>
                         <Grid item xs={12}>
                             <DogServicesTable/>

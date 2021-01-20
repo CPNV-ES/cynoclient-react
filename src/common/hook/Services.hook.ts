@@ -1,4 +1,4 @@
-import {useMutation, useQuery, useQueryCache} from "react-query";
+import {useMutation, useQuery, useQueryClient} from "react-query";
 import {List} from "immutable";
 import {Service} from "../resource/Service.resource";
 import {ServicesRepository} from "../repository/Services.repository";
@@ -18,12 +18,12 @@ export function useService(id: number) {
 }
 
 export function useDeleteService() {
-    const cache = useQueryCache();
+    const client = useQueryClient();
     return useMutation(
         (service: Service) => ServicesRepository.deleteService(service),
         {
             onSuccess: async (_, service: Service) => {
-                await cache.invalidateQueries(CACHE_KEY,{refetchActive: true, refetchInactive: true});
+                await client.invalidateQueries(CACHE_KEY);
             },
         }
     )

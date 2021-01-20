@@ -1,7 +1,6 @@
 import React, {PropsWithChildren} from "react";
 import {BrowserRouter} from "react-router-dom"
 import {QueryClient, QueryClientProvider} from "react-query";
-import {ReactQueryDevtools} from "react-query/devtools";
 import {createMuiTheme, CssBaseline, ThemeProvider} from "@material-ui/core";
 import {RecoilRoot} from "recoil";
 
@@ -28,7 +27,6 @@ export function ProviderComponent(props: PropsWithChildren<any>) {
                     <QueryClientProvider client={queryClient}>
                         <CssBaseline/>
                         {props.children}
-                        <ReactQueryDevtools initialIsOpen/>
                     </QueryClientProvider>
                 </BrowserRouter>
             </RecoilRoot>

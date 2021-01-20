@@ -47,9 +47,7 @@ export function ClientsShowComponent() {
                                     await deleteClient(client)
                                 }
                                 catch (err){
-                                    // <Alert severity="error">Votre client possède des chiens !</Alert>
                                     setShowAlert(true);
-                                    // alert("Votre client possède des chiens !");
                                 }
                             }} ><DeleteIcon/></IconButton>
                         </Grid>

@@ -1,4 +1,4 @@
-import {useMutation, useQuery, useQueryCache} from "react-query";
+import {useMutation, useQuery, useQueryClient} from "react-query";
 import {List} from "immutable";
 import {ClientTakeService} from "../resource/ClientTakeService.resource";
 import {ClientTakeServicesRepository} from "../repository/ClientTakeServicesRepository";
@@ -6,7 +6,7 @@ import {ClientTakeServicesRepository} from "../repository/ClientTakeServicesRepo
 const CLIENT_TAKE_SERVICE_CACHE_KEY = "clientTakeService"
 
 export function useClientTakeServices() {
-    const cache = useQueryCache();
+    const cache = useQueryClient();
 
     return useQuery<List<ClientTakeService>>(
         CLIENT_TAKE_SERVICE_CACHE_KEY,
@@ -24,7 +24,7 @@ export function useClientTakeService(id: number) {
 }
 
 export function useEditClientTakeService(){
-    const cache = useQueryCache();
+    const cache = useQueryClient();
     return useMutation(
         (clientTakeService: ClientTakeService) => ClientTakeServicesRepository.patchClientTakeService(clientTakeService),
         {

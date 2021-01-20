@@ -8,7 +8,7 @@ import {DogsIndexComponent} from "./dogs/index/DogsIndex.component";
 import {BreedsIndexComponent} from "./breeds/index/BreedsIndex.component";
 import {DogShowComponent} from "./dogs/show/DogShow.component";
 import {DiseasesIndexComponent} from "./diseases/index/DiseasesIndex.component"
-import {DiseaseShowComponent} from "./diseases/show/DiseasesShow.component";
+import {DiseaseShowComponent} from "./diseases/show/DiseaseShow.component";
 import {ServicesIndexComponent} from "./services/index/ServicesIndex.component";
 
 export function RouterComponent() {

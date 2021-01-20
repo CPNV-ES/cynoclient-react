@@ -1,4 +1,5 @@
 import {CommonResource} from "./Common.resource";
+import {Dog} from "./Dog.resource"
 
 export interface Disease extends CommonResource {
     noun: string,
@@ -8,4 +9,5 @@ export interface Disease extends CommonResource {
     curative: string,
     isVaccinable: boolean,
     isZoonosis: boolean,
+    dogs: Dog[]
 }

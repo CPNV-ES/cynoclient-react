@@ -4,7 +4,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import React from "react";
 import {displayBool} from "../../common/utils/Data.utils";
 import {useHistory, useParams, Redirect} from "react-router-dom";
-import { BorderRight } from "@material-ui/icons";
+import {DiseasesDogsTable} from "./DiseaseDogsTable.component"
 
 export function DiseaseShowComponent() {
     const styles = useStyles();
@@ -22,7 +22,7 @@ export function DiseaseShowComponent() {
             <Paper className={styles.paper}>
                 <Grid container>
                     <Grid item xs={12} >
-                        <b>{disease.noun}</b>
+                        <h1>{disease.noun}</h1>
                     </Grid>
                     <Grid container item xs={12} className={styles.row}>
                         <Grid item xs={1} style={{minWidth: 115}}><b>Vacinable ? :</b> </Grid>
@@ -49,7 +49,8 @@ export function DiseaseShowComponent() {
                         <Grid item>{disease.curative}</Grid>
                     </Grid>
                     <Grid container item alignContent="flex-start" xs={12} className={styles.dogs}>
-                        
+                        <h2>Chiens ayant la maladie :</h2>
+                        <DiseasesDogsTable/>
                     </Grid> 
                 </Grid>
             </Paper>

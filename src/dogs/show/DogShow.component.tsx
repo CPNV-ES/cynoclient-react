@@ -99,9 +99,9 @@ export function DogShowComponent() {
                         </Grid>
 
                         <Grid item justify={"flex-end"} xs={3}>
-                            <Button variant={"contained"} color={"primary"}
-                                    startIcon={<AddIcon/>}
-                                    onClick={() => alert("NOT IMPLEMENTED")}/>
+                            {/*
+                                Button to add service goes here
+                            */}
                         </Grid>
                         <Grid item xs={12}>
                             <DogServicesTable/>

@@ -8,7 +8,7 @@ export const ClientTakeServicesRepository = {
         .then(res => List(res.data)),
 
     getClientTakeService: (id: number): Promise<ClientTakeService | null> => Axios
-        .get(`/api/clients_take_services/${id}?with[]=with[]=service`)
+        .get(`/api/clients_take_services/${id}?with[]=service`)
         .then(res => res.data),
 
     postClientTakeService: (clientTakeService: ClientTakeService) => Axios

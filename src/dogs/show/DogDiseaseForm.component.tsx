@@ -4,10 +4,11 @@ import {useDog, useEditDog} from "../../common/hook/Dogs.hook";
 import {useDiseases} from "../../common/hook/Diseases.hook";
 import {Field, Formik} from "formik";
 import {makeStyles} from "@material-ui/core/styles";
-import {Button, createStyles, Grid, Theme} from "@material-ui/core";
+import {createStyles, Grid, IconButton, Theme} from "@material-ui/core";
 import {Autocomplete} from "@material-ui/lab";
 import {TextField} from "formik-material-ui";
 import {Disease} from "../../common/resource/Diseases.ressource";
+import SendIcon from "@material-ui/icons/Send";
 
 export function DogDiseaseFormComponent() {
     const route = useParams<{ dogId: string }>();
@@ -42,13 +43,12 @@ export function DogDiseaseFormComponent() {
                             />
                         </Grid>
                         <Grid item xs={3} md={3} className={styles.fieldRow}>
-                            <Button
-                                variant="contained"
-                                color="primary"
+                            <IconButton
+                                className={styles.send}
                                 disabled={isSubmitting}
                                 onClick={submitForm}>
-                                Submit
-                            </Button>
+                                <SendIcon/>
+                            </IconButton>
                         </Grid>
                     </form>
                 </div>
@@ -65,6 +65,12 @@ const useStyles = makeStyles((theme: Theme) =>
         wrapper: {
             padding: theme.spacing(2),
             minWidth: 300,
+        },
+        send: {
+            backgroundColor: theme.palette.primary.main,
+            "&:hover" : {
+                backgroundColor: theme.palette.primary.dark,
+            }
         }
     })
 );

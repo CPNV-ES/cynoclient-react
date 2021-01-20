@@ -60,7 +60,10 @@ export function BreedsIndexComponent() {
                         >
                             <MenuItem value={-1}>Aucun</MenuItem>
                             {
-                                categories.map((value, key) => <MenuItem key={key} value={key}>{value}</MenuItem>)
+                                categories
+                                    .map((value, key) => <MenuItem key={key} value={key}>{value}</MenuItem>)
+                                    .toList()
+                                    .toArray()
                             }
                         </Select>
                     </FormControl>

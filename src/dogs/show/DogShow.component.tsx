@@ -77,7 +77,7 @@ export function DogShowComponent() {
                             {displayDiseaseForm && <DogDiseaseFormComponent/>}
                         </Grid>
 
-                        <Grid item justify={"flex-end"} xs={3}>
+                        <Grid item xs={3}>
                             <Button variant={"contained"} color={"primary"}
                                     startIcon={<AddIcon/>}
                                     onClick={() => setDisplayDiseaseForm(true)}/>
@@ -91,7 +91,7 @@ export function DogShowComponent() {
                             <h2>Services</h2>
                         </Grid>
 
-                        <Grid item justify={"flex-end"} xs={3}>
+                        <Grid item xs={3}>
                             <Button variant={"contained"} color={"primary"}
                                     startIcon={<AddIcon/>}
                                     onClick={() => alert("NOT IMPLEMENTED")}/>

@@ -10,9 +10,9 @@ import {Service} from "../../common/resource/Service.resource";
 import {displayServiceDuration} from "../../common/utils/Service.utils";
 import {useHistory} from "react-router-dom";
 
-export function ServiceRow(props: {service: Service, onClick: () => void}) {
+export function ServiceRow(props: { service: Service, onClick: () => void }) {
     return (
-        <TableRow hover key={props.service.id} onClick={props.onClick}>
+        <TableRow hover onClick={props.onClick}>
             <TableCell>{props.service.moment}</TableCell>
             <TableCell>{displayServiceDuration(props.service)}</TableCell>
             <TableCell>{props.service.type}</TableCell>
@@ -39,7 +39,8 @@ export function ServicesTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {services?.map((service) => <ServiceRow service={service} onClick={() => history.push(`/services/${service.id}/show`)}/>)}
+                    {services?.map((service: Service) => <ServiceRow key={service.id} service={service}
+                                                                     onClick={() => history.push(`/services/${service.id}/show`)}/>)}
                 </TableBody>
             </Table>
         </TableContainer>

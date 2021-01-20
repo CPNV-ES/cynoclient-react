@@ -26,7 +26,7 @@ export function ClientsShowComponent() {
             {
                 showAlert && (
                     <Alert  variant="outlined" severity="error">
-                        <AlertTitle>Impossible d'éffacer votre client</AlertTitle>
+                        <AlertTitle>Impossible d'effacer votre client</AlertTitle>
                         Celui-ci possède des chiens !
                     </Alert>
                 )

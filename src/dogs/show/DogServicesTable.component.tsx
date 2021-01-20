@@ -1,6 +1,6 @@
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
 import React from "react";
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {useDog} from "../../common/hook/Dogs.hook";
 import {ClientTakeService} from "../../common/resource/ClientTakeService.resource";
 import {useClientTakeService} from "../../common/hook/ClientTakeServices.hook";
@@ -8,10 +8,15 @@ import {displayServiceDuration} from "../../common/utils/Service.utils";
 import {displayBool} from "../../common/utils/Data.utils";
 
 function DogClientTakeServiceRow(clientTakeServiceBase: ClientTakeService) {
+    const history = useHistory();
     const {data: clientTakeService} = useClientTakeService(clientTakeServiceBase.id);
 
+    const onServiceClick = () => {
+        history.push(`/services/${clientTakeService?.service.id}/show`);
+    }
+
     return (
-        <TableRow hover key={clientTakeServiceBase.id}>
+        <TableRow hover key={clientTakeServiceBase.id} onClick={onServiceClick}>
             <TableCell>{clientTakeService?.service.moment}</TableCell>
             <TableCell>{clientTakeService?.service.type}</TableCell>
             <TableCell>{clientTakeService ? displayServiceDuration(clientTakeService.service) : null}</TableCell>

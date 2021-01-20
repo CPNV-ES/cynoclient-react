@@ -23,7 +23,7 @@ export function useClientTakeService(id: number) {
         () => ClientTakeServicesRepository.getClientTakeService(id))
 }
 
-export function useEditClientTakeService(){
+export function useEditClientTakeService() {
     const cache = useQueryClient();
     return useMutation(
         (clientTakeService: ClientTakeService) => ClientTakeServicesRepository.patchClientTakeService(clientTakeService),

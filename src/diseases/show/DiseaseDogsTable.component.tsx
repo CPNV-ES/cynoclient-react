@@ -10,13 +10,10 @@ import {useHistory} from "react-router-dom";
 function DiseaseDogsRow(dog: Dog, onClick: () => void) {
     return (
         <TableRow hover key={dog.id} onClick={onClick}>
-            <TableCell>{dog.noun}</TableCell>
+            <TableCell><b>{dog.noun}</b></TableCell>
             <TableCell>{displayDogSex(dog)}</TableCell>
             <TableCell>{displayBool(dog.isDead)}</TableCell>
-            <TableCell>{dogAge(dog)}</TableCell>
-            <TableCell>
-                Client
-            </TableCell>
+            <TableCell>{dogAge(dog)} ans</TableCell>
         </TableRow>
     );
 }
@@ -34,7 +31,6 @@ export function DiseasesDogsTable() {
                         <TableCell>Sexe</TableCell>
                         <TableCell>Mort ?</TableCell>
                         <TableCell>Age</TableCell>
-                        <TableCell>Propiétaire</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

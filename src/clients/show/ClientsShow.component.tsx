@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Redirect, useHistory, useParams} from "react-router-dom";
 import {useClient, useDeleteClient} from "../../common/hook/Clients.hook";
 import {createStyles, Grid, IconButton, Paper, Theme} from "@material-ui/core";
@@ -6,12 +6,13 @@ import {makeStyles} from "@material-ui/core/styles";
 import {displayClientSex} from "../../common/utils/Client.utils";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import {Alert, AlertTitle} from "@material-ui/lab";
 
 export function ClientsShowComponent() {
     const styles = useStyles();
     const route = useParams<{ clientId: string }>();
     const history = useHistory();
-
+    const [showAlert, setShowAlert] = useState(false);
     const {mutateAsync: deleteClient} = useDeleteClient();
 
     const {data: client} = useClient(Number(route.clientId));
@@ -22,6 +23,14 @@ export function ClientsShowComponent() {
 
     return (
         <div className={styles.wrapper}>
+            {
+                showAlert && (
+                    <Alert  variant="outlined" severity="error">
+                        <AlertTitle>Impossible d'effacer votre client</AlertTitle>
+                        Celui-ci possède des chiens !
+                    </Alert>
+                )
+            }
             <Paper className={styles.paper}>
                 <Grid container justify={"center"}>
                     <Grid item xs={12} md={9}>
@@ -33,7 +42,14 @@ export function ClientsShowComponent() {
                         </Grid>
                         <Grid item xs={6}>
                             <IconButton className={styles.edit} onClick={() => history.push(`/clients/${client?.id}/edit`)} ><EditIcon/></IconButton>
-                            <IconButton className={styles.delete} onClick={async () => { await deleteClient(client) }} ><DeleteIcon/></IconButton>
+                            <IconButton className={styles.delete} onClick={async () => {
+                                try {
+                                    await deleteClient(client)
+                                }
+                                catch (err){
+                                    setShowAlert(true);
+                                }
+                            }} ><DeleteIcon/></IconButton>
                         </Grid>
                     </Grid>
 

@@ -84,7 +84,7 @@ export function DogShowComponent() {
                             {displayDiseaseForm && <DogDiseaseFormComponent/>}
                         </Grid>
 
-                        <Grid item justify={"flex-end"} xs={3}>
+                        <Grid item xs={3}>
                             <Button variant={"contained"} color={"primary"}
                                     startIcon={<AddIcon/>}
                                     onClick={() => setDisplayDiseaseForm(true)}/>

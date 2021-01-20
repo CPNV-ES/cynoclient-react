@@ -8,21 +8,23 @@ import TableBody from "@material-ui/core/TableBody";
 import {useServices} from "../../common/hook/Services.hook";
 import {Service} from "../../common/resource/Service.resource";
 import {displayServiceDuration} from "../../common/utils/Service.utils";
+import {useHistory} from "react-router-dom";
 
-export function ServiceRow(service: Service) {
+export function ServiceRow(props: { service: Service, onClick: () => void }) {
     return (
-        <TableRow hover key={service.id}>
-            <TableCell>{service.moment}</TableCell>
-            <TableCell>{displayServiceDuration(service)}</TableCell>
-            <TableCell>{service.type}</TableCell>
-            <TableCell>{service.description ? service.description : "-"}</TableCell>
-            <TableCell>{service.street ? service.street : "-"}</TableCell>
+        <TableRow hover onClick={props.onClick}>
+            <TableCell>{props.service.moment}</TableCell>
+            <TableCell>{displayServiceDuration(props.service)}</TableCell>
+            <TableCell>{props.service.type}</TableCell>
+            <TableCell>{props.service.description ? props.service.description : "-"}</TableCell>
+            <TableCell>{props.service.street ? props.service.street : "-"}</TableCell>
         </TableRow>
     );
 }
 
 export function ServicesTable() {
     const {data: services} = useServices();
+    const history = useHistory();
 
     return (
         <TableContainer component={Paper}>
@@ -37,7 +39,8 @@ export function ServicesTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {services?.map((service) => ServiceRow(service))}
+                    {services?.map((service: Service) => <ServiceRow key={service.id} service={service}
+                                                                     onClick={() => history.push(`/services/${service.id}/show`)}/>)}
                 </TableBody>
             </Table>
         </TableContainer>

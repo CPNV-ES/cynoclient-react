@@ -16,4 +16,7 @@ export const ClientsRepository = {
 
     patchClient: (client: Client) => Axios
         .patch(`/api/clients/${client.id}`, client),
+
+    deleteClient: (client: Client) => Axios
+        .delete(`/api/clients/${client.id}`),
 }

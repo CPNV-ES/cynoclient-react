@@ -1,4 +1,4 @@
-import {useQuery, useQueryCache} from "react-query";
+import {useQuery, useQueryClient} from "react-query";
 import {List} from "immutable";
 import {Breed} from "../resource/Breed.resource";
 import {BreedsRepository} from "../repository/Breeds.repository";
@@ -6,14 +6,14 @@ import {BreedsRepository} from "../repository/Breeds.repository";
 const BREED_CACHE_KEY = "breeds";
 
 export function useBreeds() {
-    const cache = useQueryCache();
+    const queryClient = useQueryClient();
 
     return useQuery<List<Breed>>(
         BREED_CACHE_KEY,
         () => BreedsRepository.getBreeds(), {
             onSuccess: breeds => {
                 breeds.forEach(breed => {
-                    cache.setQueryData([BREED_CACHE_KEY, breed.id], breed);
+                    queryClient.setQueryData([BREED_CACHE_KEY, breed.id], breed);
                 })
             }
         }

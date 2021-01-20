@@ -23,7 +23,6 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
     const {mutateAsync: createClient} = useCreateClient();
     const {data: localities} = useLocalities();
     const defaultLocation = {zip: client?.locality?.zip || "", noun: client?.locality?.noun || ""};
-
     return (
         <Formik
             initialValues={{
@@ -31,7 +30,7 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                 lastname: props.isEditing ? client?.lastname || '' : '',
                 phone: props.isEditing ? client?.phone || '' : '',
                 email: props.isEditing ? client?.email || '' : '',
-                isFemale: props.isEditing ? client?.isFemale || true : true,
+                isFemale: props.isEditing ? Number(client?.isFemale) : 1,
                 street: props.isEditing ? client?.street || '' : '',
                 locality: props.isEditing ? client?.locality || null : null,
             }}
@@ -66,10 +65,11 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                     lastname: values.lastname,
                     phone: values.phone,
                     email: values.email,
-                    isFemale: values.isFemale,
+                    isFemale: Boolean(Number(values.isFemale)),
                     street: values.street,
                     locality: values.locality,
                 }
+
                 props.isEditing ? editClient(customClient) : createClient(customClient)
                 history.push(`/`)
             }}
@@ -87,8 +87,8 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                                     component={Select}
                                     name="isFemale"
                                     label="Êtes-vous une femme?">
-                                    <MenuItem value="false">Homme</MenuItem>
-                                    <MenuItem value="true">Femme</MenuItem>
+                                    <MenuItem value="0">Homme</MenuItem>
+                                    <MenuItem value="1">Femme</MenuItem>
                                 </Field>
                             </Grid>
                             <Grid item xs={12} md={6} className={styles.fieldRow}>
@@ -120,7 +120,6 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                                     name="email"
                                     label="email"
                                 />
-
                             </Grid>
                             <Grid item xs={12} md={6} className={styles.fieldRow}>
                                 <Autocomplete

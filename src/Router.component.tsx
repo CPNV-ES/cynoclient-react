@@ -1,5 +1,4 @@
 import React from "react";
-// import {HomeComponent} from "./home/Home.component";;
 import {ClientFormComponent} from "./clients/Form/ClientForm.component";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {ClientsIndexComponent} from "./clients/index/ClientsIndex.component";
@@ -10,6 +9,8 @@ import {DogShowComponent} from "./dogs/show/DogShow.component";
 import {DiseasesIndexComponent} from "./diseases/index/DiseasesIndex.component"
 import {DiseaseShowComponent} from "./diseases/show/DiseaseShow.component";
 import {ServicesIndexComponent} from "./services/index/ServicesIndex.component";
+import {BreedsShowComponent} from "./breeds/show/BreedsShow.component";
+import {ServiceShowComponent} from "./services/show/ServiceShow.component";
 
 export function RouterComponent() {
     return (
@@ -26,6 +27,9 @@ export function RouterComponent() {
             <Route path="/clients">
                 <ClientsIndexComponent/>
             </Route>
+            <Route path="/breeds/:breedId">
+                <BreedsShowComponent/>
+            </Route>
             <Route path="/breeds">
                 <BreedsIndexComponent/>
             </Route>
@@ -40,6 +44,9 @@ export function RouterComponent() {
             </Route>
             <Route path="/diseases">
                 <DiseasesIndexComponent/>
+            </Route>
+            <Route path="/services/:serviceId/show">
+                <ServiceShowComponent/>
             </Route>
             <Route path="/services">
                 <ServicesIndexComponent/>

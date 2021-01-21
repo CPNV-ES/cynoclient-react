@@ -1,27 +1,28 @@
 import React from 'react';
-import {Button, createStyles, Grid, InputLabel, MenuItem, Theme} from "@material-ui/core";
+import {createStyles, Grid, IconButton, InputLabel, MenuItem, Theme} from "@material-ui/core";
 import {Autocomplete} from '@material-ui/lab';
 import {Select, TextField} from 'formik-material-ui';
 import {Field, Formik} from 'formik';
 import * as Yup from 'yup';
 import "yup-phone";
 import {makeStyles} from "@material-ui/core/styles";
-import {useParams} from "react-router-dom";
-import {useClient, useEditClient, useCreateClient} from "../../common/hook/Clients.hook";
+import {useHistory, useParams} from "react-router-dom";
+import {useClient, useCreateClient, useEditClient} from "../../common/hook/Clients.hook";
 import {useLocalities} from "../../common/hook/Locality.hook";
 import {Locality} from "../../common/resource/Locality.resource";
 import {Client} from "../../common/resource/Client.resource";
+import SendIcon from '@material-ui/icons/Send';
 
 export function ClientFormComponent(props: { isEditing: boolean }) {
 
+    const history = useHistory();
     const route = useParams<{ clientId?: string }>();
     const styles = useStyles();
     const {data: client} = useClient(Number(route.clientId || -1))
-    const [editClient] = useEditClient();
-    const [createClient] = useCreateClient();
+    const {mutateAsync: editClient} = useEditClient();
+    const {mutateAsync: createClient} = useCreateClient();
     const {data: localities} = useLocalities();
     const defaultLocation = {zip: client?.locality?.zip || "", noun: client?.locality?.noun || ""};
-
     return (
         <Formik
             initialValues={{
@@ -29,7 +30,7 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                 lastname: props.isEditing ? client?.lastname || '' : '',
                 phone: props.isEditing ? client?.phone || '' : '',
                 email: props.isEditing ? client?.email || '' : '',
-                isFemale: props.isEditing ? client?.isFemale || true : true,
+                isFemale: props.isEditing ? Number(client?.isFemale) : 1,
                 street: props.isEditing ? client?.street || '' : '',
                 locality: props.isEditing ? client?.locality || null : null,
             }}
@@ -64,11 +65,13 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                     lastname: values.lastname,
                     phone: values.phone,
                     email: values.email,
-                    isFemale: values.isFemale,
+                    isFemale: Boolean(values.isFemale),
                     street: values.street,
                     locality: values.locality,
                 }
-                return props.isEditing ? editClient(customClient) : createClient(customClient)
+
+                props.isEditing ? editClient(customClient) : createClient(customClient)
+                history.push(`/`)
             }}
         >
             {({submitForm, isSubmitting,setFieldValue}) => (
@@ -84,8 +87,8 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                                     component={Select}
                                     name="isFemale"
                                     label="Êtes-vous une femme?">
-                                    <MenuItem value="false">Homme</MenuItem>
-                                    <MenuItem value="true">Femme</MenuItem>
+                                    <MenuItem value={0}>Homme</MenuItem>
+                                    <MenuItem value={1}>Femme</MenuItem>
                                 </Field>
                             </Grid>
                             <Grid item xs={12} md={6} className={styles.fieldRow}>
@@ -117,7 +120,6 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                                     name="email"
                                     label="email"
                                 />
-
                             </Grid>
                             <Grid item xs={12} md={6} className={styles.fieldRow}>
                                 <Autocomplete
@@ -140,14 +142,13 @@ export function ClientFormComponent(props: { isEditing: boolean }) {
                                     label="Numéro et nom de rue"
                                 />
                             </Grid>
-                            <Grid item xs={12} className={styles.fieldRow}>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
+                            <Grid item xs={12}>
+                                <IconButton
+                                    className={styles.send}
                                     disabled={isSubmitting}
                                     onClick={submitForm}>
-                                    Submit
-                                </Button>
+                                    <SendIcon/>
+                                </IconButton>
                             </Grid>
                         </Grid>
                     </form>
@@ -165,6 +166,12 @@ const useStyles = makeStyles((theme: Theme) =>
         wrapper: {
             padding: theme.spacing(2),
             minWidth: 300,
+        },
+        send: {
+            backgroundColor: theme.palette.primary.main,
+            "&:hover" : {
+                backgroundColor: theme.palette.primary.dark,
+            }
         }
     })
 );

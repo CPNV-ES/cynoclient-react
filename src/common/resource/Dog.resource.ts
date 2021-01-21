@@ -1,6 +1,8 @@
 import {CommonResource} from "./Common.resource";
 import {Client} from "./Client.resource";
 import {Breed} from "./Breed.resource";
+import {Disease} from "./Diseases.ressource";
+import {ClientTakeService} from "./ClientTakeService.resource";
 
 export interface Dog extends CommonResource {
     noun: string,
@@ -13,4 +15,6 @@ export interface Dog extends CommonResource {
     breed: Breed,
     crossbreed: Breed,
     client: Client,
+    diseases: Disease[],
+    clients_take_services: ClientTakeService[],
 }

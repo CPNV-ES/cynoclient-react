@@ -2,7 +2,7 @@ import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {Link, Redirect, useHistory, useParams} from "react-router-dom";
 import {useDog} from "../../common/hook/Dogs.hook";
 import React, {useState} from "react";
-import {Button, Grid, Paper} from "@material-ui/core";
+import { Grid, IconButton, Paper} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from '@material-ui/icons/Add';
@@ -40,15 +40,12 @@ export function DogShowComponent() {
                     </Grid>
                     <Grid container item direction={"row"} justify={"space-between"} xs={12} md={3}>
                         <Grid item xs={6}>
-                            <Button variant={"contained"} color={"primary"}
-                                    startIcon={<EditIcon/>}
-                                    onClick={() => history.push(`/dogs/${dog?.id}/edit`)}/>
+                            <IconButton className={styles.edit}
+                                        onClick={() => history.push(`/dogs/${dog?.id}/edit`)}><EditIcon/></IconButton>
                         </Grid>
 
                         <Grid item xs={6}>
-                            <Button variant={"contained"} color={"secondary"}
-                                    startIcon={<DeleteIcon/>}
-                                    onClick={() => alert("NOT IMPLEMENTED")}/>
+                            <IconButton className={styles.delete} onClick={() => alert("NOT IMPLEMENTED")}><DeleteIcon/></IconButton>
                         </Grid>
                     </Grid>
                     <Grid item xs={12} md={12}>
@@ -70,9 +67,7 @@ export function DogShowComponent() {
                         <p>
                             Propriétaire : {clientFullName(owner)}&nbsp;
                             <Link to={`/clients/${owner.id}/show`}>
-                                <IconContext.Provider
-                                    value={{color: 'white', size: '1.2em'}}
-                                >
+                                <IconContext.Provider value={{color: 'white', size: '1.2em'}} >
                                     <AiOutlineArrowRight/>
                                 </IconContext.Provider>
                             </Link>
@@ -85,9 +80,8 @@ export function DogShowComponent() {
                         </Grid>
 
                         <Grid item xs={3}>
-                            <Button variant={"contained"} color={"primary"}
-                                    startIcon={<AddIcon/>}
-                                    onClick={() => setDisplayDiseaseForm(true)}/>
+                            <IconButton className={styles.edit}
+                                        onClick={() => setDisplayDiseaseForm(true)}><AddIcon/></IconButton>
                         </Grid>
                     </Grid>
                     <Grid container item direction={"row"} justify={"space-between"} xs={12} md={12}>
@@ -122,5 +116,18 @@ const useStyles = makeStyles((theme: Theme) =>
         paper: {
             padding: theme.spacing(2),
         },
+        delete: {
+            backgroundColor: theme.palette.error.main,
+            "&:hover" : {
+                backgroundColor: theme.palette.error.dark,
+            }
+        },
+        edit: {
+            marginRight: 20,
+            backgroundColor: theme.palette.primary.main,
+            "&:hover" : {
+                backgroundColor: theme.palette.primary.dark,
+            }
+        }
     })
 );

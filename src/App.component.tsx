@@ -1,20 +1,22 @@
-import {Button} from '@material-ui/core';
-import React from 'react';
+import React, {Suspense} from 'react';
 import {NavigationComponent} from './navigation/Navigation.component';
-import {useCounter} from "./common/hook/Counter.hook";
+import {ProviderComponent} from "./Provider.component";
+import {RouterComponent} from "./Router.component";
+import {LoaderComponent} from "./common/component/Loader.component";
 
 export function AppComponent() {
-  const {counter, setCounter} = useCounter(0)
-
-  return (
-    <div>
-      <NavigationComponent/>
-      <div>
-        <p>Count: {counter}</p>
-        <Button variant="contained" color="primary" onClick={() => setCounter(counter + 1)}>
-          Increment
-        </Button>
-      </div>
-    </div>
-  );
+    return (
+        <ProviderComponent>
+            <div>
+                <NavigationComponent>
+                    <Suspense fallback={<LoaderComponent/>}>
+                        <div>
+                            <RouterComponent/>
+                        </div>
+                    </Suspense>
+                </NavigationComponent>
+            </div>
+        </ProviderComponent>
+    );
 }
+

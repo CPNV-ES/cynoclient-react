@@ -3,13 +3,12 @@ import {createStyles, Paper, Grid, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import React from "react";
 import {displayBool} from "../../common/utils/Data.utils";
-import {useHistory, useParams, Redirect} from "react-router-dom";
+import { useParams, Redirect} from "react-router-dom";
 import {DiseasesDogsTable} from "./DiseaseDogsTable.component"
 
 export function DiseaseShowComponent() {
     const styles = useStyles();
     const route = useParams<{ diseaseId: string }>();
-    const history = useHistory();
 
     const {data: disease} = useDisease(Number(route.diseaseId));
 

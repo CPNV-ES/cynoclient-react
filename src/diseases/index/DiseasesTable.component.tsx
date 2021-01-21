@@ -9,11 +9,11 @@ import {displayBool} from "../../common/utils/Data.utils";
 export function DiseaseRow(disease: Disease, onClick: () => void) {
     const styles = useStyles();
     return (
-        <TableRow hover key={disease.id} onClick={onClick}>
-            <TableCell className={styles.row}>{disease.noun}</TableCell>
-            <TableCell className={styles.row}>{disease.symptoms}</TableCell>
-            <TableCell className={styles.row}>{displayBool(disease.isVaccinable)}</TableCell>
-            <TableCell className={styles.row}>{displayBool(disease.isZoonosis)}</TableCell>
+        <TableRow hover key={disease.id} onClick={onClick} className={styles.fieldRow}>
+            <TableCell className={styles.column}>{disease.noun}</TableCell>
+            <TableCell className={styles.column}>{disease.symptoms}</TableCell>
+            <TableCell className={styles.column}>{displayBool(disease.isVaccinable)}</TableCell>
+            <TableCell className={styles.column}>{displayBool(disease.isZoonosis)}</TableCell>
         </TableRow>
     );
 }
@@ -45,9 +45,12 @@ export function DiseasesTable() {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        row: {
+        column: {
             whiteSpace: "pre-wrap",
             verticalAlign: "top"
+        },
+        fieldRow: {
+            cursor: 'pointer',
         },
     })
 );

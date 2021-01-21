@@ -1,4 +1,14 @@
-import {Table, TableBody, TableHead, TableCell, TableContainer, TableRow, Paper} from "@material-ui/core";
+import {
+    Table,
+    TableBody,
+    TableHead,
+    TableCell,
+    TableContainer,
+    TableRow,
+    Paper,
+    Theme,
+    createStyles
+} from "@material-ui/core";
 import React from "react";
 import {Dog} from "../../common/resource/Dog.resource";
 import {useParams} from "react-router-dom";
@@ -6,10 +16,12 @@ import {useDisease} from "../../common/hook/Diseases.hook";
 import {displayDogSex, dogAge} from "../../common/utils/Dog.utils";
 import {displayBool} from "../../common/utils/Data.utils";
 import {useHistory} from "react-router-dom";
+import {makeStyles} from "@material-ui/core/styles";
 
 function DiseaseDogsRow(dog: Dog, onClick: () => void) {
+    const styles = useStyles();
     return (
-        <TableRow hover key={dog.id} onClick={onClick}>
+        <TableRow hover key={dog.id} onClick={onClick} className={styles.fieldRow}>
             <TableCell><b>{dog.noun}</b></TableCell>
             <TableCell>{displayDogSex(dog)}</TableCell>
             <TableCell>{displayBool(dog.isDead)}</TableCell>
@@ -43,3 +55,11 @@ export function DiseasesDogsTable() {
         </TableContainer>
     );
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        fieldRow: {
+            cursor: 'pointer',
+        },
+    })
+);

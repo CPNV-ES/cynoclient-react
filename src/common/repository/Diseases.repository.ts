@@ -4,7 +4,7 @@ import {Disease} from "../resource/Diseases.ressource";
 
 export const DiseasesRepository = {
     getDiseases: (): Promise<List<Disease>> => Axios
-        .get<Disease[]>(`/api/diseases`)
+        .get<Disease[]>(`/api/diseases?with[]=dogs`)
         .then(res => List(res.data)),
 
     getDisease: (id: number): Promise<Disease | null> => Axios

@@ -8,6 +8,6 @@ export const DiseasesRepository = {
         .then(res => List(res.data)),
 
     getDisease: (id: number): Promise<Disease | null> => Axios
-        .get(`/api/diseases/${id}`)
+        .get(`/api/diseases/${id}?with[]=dogs`)
         .then(res => res.data)
 }
